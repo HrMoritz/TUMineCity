@@ -39,15 +39,18 @@ public class CommandKit implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		if ((Player) sender instanceof Player) {
 			Player player = (Player) sender;
+			player.sendMessage("test0");
 			if (command.getName().equalsIgnoreCase("city")) {
+			player.sendMessage("test1");
 				if (args[0].equalsIgnoreCase("create")) {
 					int xmin, xmax, zmin, zmax;
+					player.sendMessage("test2");
 					String name;
 					name = args[1];
 					if (isNumeric(args[2]) && isNumeric(args[3]) && isNumeric(args[4]) && isNumeric(args[5])) {
+					player.sendMessage("test3");
 						BlockVector3 min = BlockVector3.at(Integer.parseInt(args[2]), 0, Integer.parseInt(args[3]));
 						BlockVector3 max = BlockVector3.at(Integer.parseInt(args[4]), 0, Integer.parseInt(args[5]));
-						;
 						cityCreator.createCity(player, player.getWorld(), name, min, max);
 						return true;
 					}
