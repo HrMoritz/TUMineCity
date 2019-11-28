@@ -57,10 +57,8 @@ public class CityCreator {
 				cities.set(path, name);
 				path = "Cities." + name;
 				cities.set(path, player);
-				player.sendMessage(region.toString());
-				player.sendMessage(regions.getRegions().toString());
+				player.sendMessage("region>>>" + region.toString());
 				regions.addRegion(region);
-				player.sendMessage(regions.getRegions().toString());
 				try {
 					regions.save();
 				} catch (StorageException e) {
