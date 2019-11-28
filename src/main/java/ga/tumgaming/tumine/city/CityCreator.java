@@ -40,7 +40,7 @@ public class CityCreator {
 		RegionManager regions = container.get(BukkitAdapter.adapt(world));
 
 		String checkPath = player.getUniqueId().toString();
-		if (cities.get(checkPath) == null) {
+		//if (cities.get(checkPath) == null) {
 			if (regions == null || regions.getRegion(name) == null) {
 				player.sendMessage("creating region");
 				// Create Region
@@ -54,7 +54,10 @@ public class CityCreator {
 				cities.set(path, name);
 				path = "Cities." + name;
 				cities.set(path, player);
+				player.sendMessage(region.toString());
+				player.sendMessage(regions.getRegions().toString());
 				regions.addRegion(region);
+				player.sendMessage(regions.getRegions().toString());
 				try {
 					regions.save();
 				} catch (StorageException e) {
@@ -63,7 +66,7 @@ public class CityCreator {
 				}
 			} else {
 				// The world has no region support or region data failed to load
-			}
+			//}
 		}
 	}
 
