@@ -41,6 +41,9 @@ public class CityCreator {
 
 		String checkPath = player.getUniqueId().toString();
 		//if (cities.get(checkPath) == null) {
+		boolean gh = regions.getRegion(name) == null;
+		player.sendMessage(Boolean.toString(gh));
+		player.sendMessage(Boolean.toString(regions == null));
 			if (regions == null || regions.getRegion(name) == null) {
 				player.sendMessage("creating region");
 				// Create Region
