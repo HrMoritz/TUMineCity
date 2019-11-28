@@ -3,7 +3,7 @@ name: Java CI
 on: 
   push:
     branches: 
-      - master
+      - develop
         
 jobs:
   build:
@@ -25,6 +25,6 @@ jobs:
         username: ${{ secrets.SSH_USERNAME }}
         password: ${{ secrets.SSH_PASSWORD }}
         port: ${{ secrets.SSH_PORT }}
-        source: "/home/runner/work/TUMineCity/TUMineCity/target/*.jar"
-        target: "/home/generalmine/server/minecraft/TUMine/plugins/TUMine/newVersions"
+        source: "/home/runner/work/TUMine/TUMine/target/*.jar"
+        target: "/home/generalmine/server/minecraft/testServer/plugins/TUMine/newVersions"
         strip_components: 3
