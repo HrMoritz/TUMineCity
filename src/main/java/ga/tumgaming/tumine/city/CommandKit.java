@@ -40,8 +40,6 @@ public class CommandKit implements CommandExecutor {
 	sender.sendMessage("hallihallo");
 		if (sender instanceof Player) {
 			Player player = (Player) sender;
-			com.sk89q.worldedit.entity.Player wePlayer = (com.sk89q.worldedit.entity.Player) player;
-			com.sk89q.worldedit.world.World weWorld = (com.sk89q.worldedit.world.World) wePlayer.getWorld();
 			player.sendMessage("test0");
 			if (command.getName().equalsIgnoreCase("city")) {
 			player.sendMessage("test1");
@@ -54,29 +52,29 @@ public class CommandKit implements CommandExecutor {
 					player.sendMessage("test3");
 						BlockVector3 min = BlockVector3.at(Integer.parseInt(args[2]), 0, Integer.parseInt(args[3]));
 						BlockVector3 max = BlockVector3.at(Integer.parseInt(args[4]), 0, Integer.parseInt(args[5]));
-						cityCreator.createCity(player, weWorld, name, min, max);
+						cityCreator.createCity(player, player.getWorld(), name, min, max);
 						return true;
 					}
 				} else if (args[0].equalsIgnoreCase("delete")) {
-					cityCreator.removeCity(player.getName(), weWorld);
+					cityCreator.removeCity(player.getName(), player.getWorld());
 					return true;
 				} else if (args[0].equalsIgnoreCase("add")) {
-					if (cityCreator.isOwner(player,cityCreator.getRegionFromPlayer(player.getName(), weWorld))) {
-						cityCreator.addMember(cityCreator.getRegionFromPlayer(player.getName(), weWorld),	args[1]);
+					if (cityCreator.isOwner(player,cityCreator.getRegionFromPlayer(player.getName(), player.getWorld()))) {
+						cityCreator.addMember(cityCreator.getRegionFromPlayer(player.getName(), player.getWorld()),	args[1]);
 					}
 					return true;
 				} else if (args[0].equalsIgnoreCase("remove")) {
-					if (cityCreator.isOwner(player,cityCreator.getRegionFromPlayer(player.getUniqueId().toString(), weWorld))) {
-						cityCreator.removeMember(cityCreator.getRegionFromPlayer(player.getUniqueId().toString(), weWorld),args[1]);
+					if (cityCreator.isOwner(player,cityCreator.getRegionFromPlayer(player.getUniqueId().toString(), player.getWorld()))) {
+						cityCreator.removeMember(cityCreator.getRegionFromPlayer(player.getUniqueId().toString(), player.getWorld()),args[1]);
 					}
 					return true;
 				} else if (args[0].equalsIgnoreCase("join")) {
-					cityCreator.joinCity(cityCreator.getRegionFromName(args[1], weWorld),
+					cityCreator.joinCity(cityCreator.getRegionFromName(args[1], player.getWorld()),
 							player.getUniqueId().toString());
 							return true;
 				} else if (args[0].equalsIgnoreCase("leave")) {
-					if (cityCreator.isOwner(player,cityCreator.getRegionFromPlayer(player.getUniqueId().toString(), weWorld))) {
-						cityCreator.leaveCity(cityCreator.getRegionFromPlayer(player.getUniqueId().toString(), weWorld),player.getUniqueId().toString());
+					if (cityCreator.isOwner(player,cityCreator.getRegionFromPlayer(player.getUniqueId().toString(), player.getWorld()))) {
+						cityCreator.leaveCity(cityCreator.getRegionFromPlayer(player.getUniqueId().toString(), player.getWorld()),player.getUniqueId().toString());
 					return true;
 					}
 				} else if (args[0].equalsIgnoreCase("invites")) {

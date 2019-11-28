@@ -6,11 +6,12 @@ import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 
+import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import com.sk89q.worldedit.math.BlockVector3;
-import com.sk89q.worldedit.world.World;
 import com.sk89q.worldguard.WorldGuard;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.domains.DefaultDomain;
@@ -36,7 +37,7 @@ public class CityCreator {
 	public void createCity(Player player, World world, String name, BlockVector3 _min, BlockVector3 _max) {
 		RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
 		player.sendMessage(container.toString());
-		RegionManager regions = container.get( world);
+		RegionManager regions = container.get(BukkitAdapter.adapt(world));
 
 		String checkPath = player.getUniqueId().toString();
 		if (cities.get(checkPath) == null) {
@@ -61,7 +62,7 @@ public class CityCreator {
 
 	public void removeCity(String player, World world) {
 		RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
-		RegionManager regions = container.get( world);
+		RegionManager regions = container.get(BukkitAdapter.adapt(world));
 		String name = getRegionFromPlayer(player, world).getId();
 		if (regions.getRegion(name).getOwners().contains(player)) {
 			String[] key = cities.getKeys();
@@ -132,14 +133,14 @@ public class CityCreator {
 	public ProtectedRegion getRegionFromPlayer(String uuid, World world) {
 		String name = cities.get(uuid);
 		RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
-		RegionManager regions = container.get( world);
+		RegionManager regions = container.get(BukkitAdapter.adapt(world));
 
 		return regions.getRegion(name);
 	}
 	
 	public ProtectedRegion getRegionFromName(String name, World world) {
 		RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
-		RegionManager regions = container.get( world);
+		RegionManager regions = container.get(BukkitAdapter.adapt(world));
 
 		return regions.getRegion(name);
 	}
