@@ -35,6 +35,7 @@ public class CityCreator {
 
 	public void createCity(Player player, World world, String name, BlockVector3 _min, BlockVector3 _max) {
 		RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
+		player.sendMessage(container.toString());
 		RegionManager regions = container.get((com.sk89q.worldedit.world.World) world);
 
 		String checkPath = player.getUniqueId().toString();
