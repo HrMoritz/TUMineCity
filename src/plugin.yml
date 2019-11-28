@@ -1,8 +1,9 @@
 main: ga.tumgaming.tumine.TUMineCity
 name: TUMineCity
-prefix: TUM
+prefix: TUMineCity
 author: HrMoritz
 version: 0.1.0
+api-version: 1.14
 depend:
    - Vault
    [WorldGuard]
