@@ -36,12 +36,12 @@ public class CityCreator {
 
 	public void createCity(Player player, World world, String name, BlockVector3 _min, BlockVector3 _max) {
 		RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
-		player.sendMessage(container.toString());
 		RegionManager regions = container.get(BukkitAdapter.adapt(world));
 
 		String checkPath = player.getUniqueId().toString();
 		if (cities.get(checkPath) == null) {
 			if (regions == null || regions.getRegion(name) == null) {
+				player.sendMessage("creating region");
 				// Create Region
 				BlockVector3 min = BlockVector3.at(_min.getBlockX(), 0, _min.getBlockZ());
 				BlockVector3 max = BlockVector3.at(_max.getBlockX(), 255, _max.getBlockZ());
