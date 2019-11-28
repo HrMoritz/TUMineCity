@@ -47,7 +47,6 @@ public class CityCreator {
 				BlockVector3 min = BlockVector3.at(_min.getBlockX(), 0, _min.getBlockZ());
 				BlockVector3 max = BlockVector3.at(_max.getBlockX(), 255, _max.getBlockZ());
 				ProtectedRegion region = new ProtectedCuboidRegion("spawn", min, max);
-				regions.addRegion(region);
 				DefaultDomain owners = region.getMembers();
 				owners.addPlayer(player.getUniqueId());
 				region.setOwners(owners);
@@ -55,6 +54,7 @@ public class CityCreator {
 				cities.set(path, name);
 				path = "Cities." + name;
 				cities.set(path, player);
+				regions.addRegion(region);
 				try {
 					regions.save();
 				} catch (StorageException e) {
