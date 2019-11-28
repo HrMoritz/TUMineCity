@@ -1,0 +1,10 @@
+main: ga.tumgaming.tumine.TUMineCity
+name: TUMineCity
+prefix: TUM
+author: HrMoritz
+version: 0.1.0
+depend:
+   - Vault
+   [WorldGuard]
+
+commands:
