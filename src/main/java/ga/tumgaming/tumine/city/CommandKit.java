@@ -37,7 +37,7 @@ public class CommandKit implements CommandExecutor {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-		if ((Player) sender instanceof Player) {
+		if (sender instanceof Player) {
 			Player player = (Player) sender;
 			player.sendMessage("test0");
 			if (command.getName().equalsIgnoreCase("city")) {
