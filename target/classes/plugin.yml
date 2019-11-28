@@ -10,5 +10,5 @@ depend:
 
 commands:
   city:
-     description: Set yourself on fire.
-     usage: Syntax error! Simply type /&lt;command&gt; to ignite yourself.
+     description: CityCommands.
+     usage: Syntax error

@@ -53,30 +53,26 @@ public class CommandKit implements CommandExecutor {
 				} else if (args[1].equalsIgnoreCase("delete")) {
 					cityCreator.removeCity(player.getName(), args[3], player.getWorld());
 				} else if (args[1].equalsIgnoreCase("add")) {
-					if (cityCreator.isOwner(player,
-							cityCreator.getRegionFromPlayer(player.getName(), player.getWorld()))) {
-						cityCreator.addMember(cityCreator.getRegionFromPlayer(player.getName(), player.getWorld()),
-								args[3]);
+					if (cityCreator.isOwner(player,cityCreator.getRegionFromPlayer(player.getName(), player.getWorld()))) {
+						cityCreator.addMember(cityCreator.getRegionFromPlayer(player.getName(), player.getWorld()),	args[3]);
 					}
 				} else if (args[1].equalsIgnoreCase("remove")) {
-					if (cityCreator.isOwner(player,
-							cityCreator.getRegionFromPlayer(player.getName(), player.getWorld()))) {
-						cityCreator.removeMember(cityCreator.getRegionFromPlayer(player.getName(), player.getWorld()),
-								args[3]);
+					if (cityCreator.isOwner(player,cityCreator.getRegionFromPlayer(player.getUniqueId().toString(), player.getWorld()))) {
+						cityCreator.removeMember(cityCreator.getRegionFromPlayer(player.getUniqueId().toString(), player.getWorld()),args[3]);
 					}
 				} else if (args[1].equalsIgnoreCase("join")) {
-					cityCreator.joinCity(cityCreator.getRegionFromName(args[1], player.getWorld()), player.getName());
+					cityCreator.joinCity(cityCreator.getRegionFromName(args[1], player.getWorld()),
+							player.getUniqueId().toString());
 				} else if (args[1].equalsIgnoreCase("leave")) {
-					if (cityCreator.isOwner(player,
-							cityCreator.getRegionFromPlayer(player.getName(), player.getWorld()))) {
-						cityCreator.removeMember(cityCreator.getRegionFromPlayer(player.getName(), player.getWorld()),
-								args[3]);
+					if (cityCreator.isOwner(player,cityCreator.getRegionFromPlayer(player.getUniqueId().toString(), player.getWorld()))) {
+						cityCreator.leaveCity(cityCreator.getRegionFromPlayer(player.getUniqueId().toString(), player.getWorld()),player.getUniqueId().toString());
 					}
 				} else if (args[1].equalsIgnoreCase("invites")) {
-					cityCreator.joinCity(cityCreator.getRegionFromName(args[1], player.getWorld()), player.getName());
+					cityCreator.joinCity(cityCreator.getRegionFromName(args[1], player.getWorld()),
+							player.getUniqueId().toString());
 				}
 			}
-		}                       
+		}
 		return false;
 	}
 }

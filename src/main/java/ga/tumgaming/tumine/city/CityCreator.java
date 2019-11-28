@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 
@@ -75,8 +77,8 @@ public class CityCreator {
 
 	}
 
-	public void addMember(ProtectedRegion region, String newMember) {
-		String checkPath = UUID.fromString(newMember).toString();
+	public void addMember(ProtectedRegion region, String uuid) {
+		String checkPath = uuid;
 		if (cities.get(checkPath) == null) {
 			if(invitations.get(checkPath) != null){
 				List<String> list = invitations.get(checkPath);
@@ -90,36 +92,44 @@ public class CityCreator {
 		}
 	}
 
-	public void removeMember(ProtectedRegion region, String member) {
-		String checkPath = UUID.fromString(member).toString();
+	public void removeMember(ProtectedRegion region, String name) {
+		String uuid = "";
+		if(Bukkit.getPlayer(name) == null) {
+		@SuppressWarnings("deprecation")
+		OfflinePlayer op = Bukkit.getOfflinePlayer(name);
+		uuid = op.getUniqueId().toString();
+		}else {
+			uuid = Bukkit.getPlayer(name).getUniqueId().toString();
+		}
+		String checkPath = uuid;
 		if (cities.get(checkPath) == region.getId()) {
 			DefaultDomain members = region.getMembers();
-			if (members.contains(member)) {
-				members.removePlayer(member);
+			if (members.contains(uuid)) {
+				members.removePlayer(uuid);
 				region.setMembers(members);
 			}
 		}
 	}
 
-	public void leaveCity(ProtectedRegion region, String member) {
-		String checkPath = UUID.fromString(member).toString();
+	public void leaveCity(ProtectedRegion region, String uuid) {
+		String checkPath = UUID.fromString(uuid).toString();
 		if (cities.get(checkPath) != null) {
 			cities.set(checkPath, null);
 		}
 	}
 
-	public void joinCity(ProtectedRegion region, String newMember) {
-		String checkPath = UUID.fromString(newMember).toString() + region.getId();
+	public void joinCity(ProtectedRegion region, String uuid) {
+		String checkPath = uuid;
 		if (cities.get(checkPath) == null) {
-			if (isInvited(region.getId(), newMember)) {
+			if (isInvited(region.getId(), uuid)) {
 				invitations.set(checkPath, null);
 				cities.set(checkPath, region.getId());
 			}
 		}
 	}
 
-	public ProtectedRegion getRegionFromPlayer(String player, World world) {
-		String name = cities.get(UUID.fromString(player).toString());
+	public ProtectedRegion getRegionFromPlayer(String uuid, World world) {
+		String name = cities.get(uuid);
 		RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
 		RegionManager regions = container.get((com.sk89q.worldedit.world.World) world);
 
@@ -142,8 +152,8 @@ public class CityCreator {
 		List<String> list = invitations.get(checkPath);
 	}
 	
-	public boolean isInvited(String region, String player) {
-		String checkPath = UUID.fromString(player).toString();
+	public boolean isInvited(String region, String uuid) {
+		String checkPath = uuid;
 		List<String> list = invitations.get(checkPath);
 		return list.contains(region);
 	}
