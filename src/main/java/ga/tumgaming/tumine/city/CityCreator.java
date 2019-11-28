@@ -40,7 +40,9 @@ public class CityCreator {
 		RegionManager regions = container.get(BukkitAdapter.adapt(world));
 
 		String checkPath = player.getUniqueId().toString();
+		player.sendMessage(Boolean.toString(cities.get(checkPath) == null));
 		if (cities.get(checkPath) == null) {
+			player.sendMessage(Boolean.toString(regions == null || regions.getRegion(name) == null));
 			if (regions == null || regions.getRegion(name) == null) {
 				player.sendMessage("creating region");
 				// Create Region
