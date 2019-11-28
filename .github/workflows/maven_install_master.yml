@@ -26,5 +26,5 @@ jobs:
         password: ${{ secrets.SSH_PASSWORD }}
         port: ${{ secrets.SSH_PORT }}
         source: "/home/runner/work/TUMineCity/TUMineCity/target/*.jar"
-        target: "/home/generalmine/server/minecraft/TUMine/plugins/TUMine/newVersions"
+        target: "/home/generalmine/server/minecraft/TUMine/plugins"
         strip_components: 3
