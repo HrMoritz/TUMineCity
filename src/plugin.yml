@@ -6,6 +6,9 @@ version: 0.1.0
 api-version: 1.14
 depend:
    - Vault
-   [WorldGuard]
+   - WorldGuard
 
 commands:
+  city:
+     description: CityCommands.
+     usage: Syntax error

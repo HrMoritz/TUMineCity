@@ -37,46 +37,53 @@ public class CommandKit implements CommandExecutor {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-		if ((Player) sender instanceof Player) {
+		if (sender instanceof Player) {
 			Player player = (Player) sender;
 			if (command.getName().equalsIgnoreCase("city")) {
-				if (args[1].equalsIgnoreCase("create")) {
+				if (args[0].equalsIgnoreCase("create")) {
 					int xmin, xmax, zmin, zmax;
 					String name;
-					name = args[2];
-					if (isNumeric(args[3]) && isNumeric(args[4]) && isNumeric(args[5]) && isNumeric(args[6])) {
-						BlockVector3 min = BlockVector3.at(Integer.parseInt(args[3]), 0, Integer.parseInt(args[4]));
-						BlockVector3 max = BlockVector3.at(Integer.parseInt(args[5]), 0, Integer.parseInt(args[6]));
-						;
-						cityCreator.createCity(player, player.getWorld(), name, min, max);
+					name = args[1];
+					if (isNumeric(args[2]) && isNumeric(args[3]) && isNumeric(args[4]) && isNumeric(args[5])) {
+						BlockVector3 min = BlockVector3.at(Integer.parseInt(args[2]), 0, Integer.parseInt(args[3]));
+						BlockVector3 max = BlockVector3.at(Integer.parseInt(args[4]), 0, Integer.parseInt(args[5]));
+						player.sendMessage(cityCreator.createCity(player, player.getWorld(), name, min, max));
+						return true;
 					}
-				} else if (args[1].equalsIgnoreCase("delete")) {
-					cityCreator.removeCity(player.getName(), args[3], player.getWorld());
-				} else if (args[1].equalsIgnoreCase("add")) {
-					if (cityCreator.isOwner(player,
-							cityCreator.getRegionFromPlayer(player.getName(), player.getWorld()))) {
-						cityCreator.addMember(cityCreator.getRegionFromPlayer(player.getName(), player.getWorld()),
-								args[3]);
+				} else if (args[0].equalsIgnoreCase("delete")) {
+					player.sendMessage(cityCreator.removeCity(player.getName(), player.getWorld()));
+					return true;
+				} else if (args[0].equalsIgnoreCase("add")) {
+					if (cityCreator.isOwner(player,cityCreator.getRegionFromPlayer(player.getName(), player.getWorld()))) {
+						player.sendMessage(cityCreator.addMember(cityCreator.getRegionFromPlayer(player.getName(), player.getWorld()),	args[1]));
+					}else {
+						player.sendMessage("You are not the owner of this city!");
 					}
-				} else if (args[1].equalsIgnoreCase("remove")) {
-					if (cityCreator.isOwner(player,
-							cityCreator.getRegionFromPlayer(player.getName(), player.getWorld()))) {
-						cityCreator.removeMember(cityCreator.getRegionFromPlayer(player.getName(), player.getWorld()),
-								args[3]);
+					return true;
+				} else if (args[0].equalsIgnoreCase("remove")) {
+					if (cityCreator.isOwner(player,cityCreator.getRegionFromPlayer(player.getUniqueId().toString(), player.getWorld()))) {
+						player.sendMessage(cityCreator.removeMember(cityCreator.getRegionFromPlayer(player.getUniqueId().toString(), player.getWorld()),args[1]));
+					}else {
+						player.sendMessage("You are not the owner of this city!");
 					}
-				} else if (args[1].equalsIgnoreCase("join")) {
-					cityCreator.joinCity(cityCreator.getRegionFromName(args[1], player.getWorld()), player.getName());
-				} else if (args[1].equalsIgnoreCase("leave")) {
-					if (cityCreator.isOwner(player,
-							cityCreator.getRegionFromPlayer(player.getName(), player.getWorld()))) {
-						cityCreator.removeMember(cityCreator.getRegionFromPlayer(player.getName(), player.getWorld()),
-								args[3]);
+					return true;
+				} else if (args[0].equalsIgnoreCase("join")) {
+					player.sendMessage(cityCreator.joinCity(cityCreator.getRegionFromName(args[1], player.getWorld()),
+							player.getUniqueId().toString()));
+							return true;
+				} else if (args[0].equalsIgnoreCase("leave")) {
+					if (cityCreator.isOwner(player,cityCreator.getRegionFromPlayer(player.getUniqueId().toString(), player.getWorld()))) {
+						player.sendMessage(cityCreator.leaveCity(cityCreator.getRegionFromPlayer(player.getUniqueId().toString(), player.getWorld()),player.getUniqueId().toString()));
+					return true;
+					}else {
+						player.sendMessage("You are not the owner of this city!");
 					}
-				} else if (args[1].equalsIgnoreCase("invites")) {
-					cityCreator.joinCity(cityCreator.getRegionFromName(args[1], player.getWorld()), player.getName());
+				} else if (args[0].equalsIgnoreCase("invites")) {
+					player.sendMessage(cityCreator.getInvites(player));
+							return true;
 				}
 			}
-		}                       
+		}
 		return false;
 	}
 }

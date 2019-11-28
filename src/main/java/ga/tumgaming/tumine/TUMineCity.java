@@ -33,7 +33,7 @@ public class TUMineCity extends JavaPlugin {
         player = new Config(this, "player");
         invitations = new Config(this, "invitations");
         cityCreator = new CityCreator(player, invitations);
-        commandKit = new CommandKit(player, invitations, cityCreator);
+        getCommand("city").setExecutor(new CommandKit(player, invitations, cityCreator));
         registerEvents();
 
 

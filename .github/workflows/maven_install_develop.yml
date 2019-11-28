@@ -3,7 +3,7 @@ name: Java CI
 on: 
   push:
     branches: 
-      - master
+      - develop
         
 jobs:
   build:
@@ -26,5 +26,9 @@ jobs:
         password: ${{ secrets.SSH_PASSWORD }}
         port: ${{ secrets.SSH_PORT }}
         source: "/home/runner/work/TUMineCity/TUMineCity/target/*.jar"
+<<<<<<< HEAD:.github/workflows/maven_install_master.yml
         target: "/home/generalmine/server/minecraft/TUMine/plugins"
+=======
+        target: "/home/generalmine/server/minecraft/testServer/plugins"
+>>>>>>> 711735445213f12fba1e542057e321329e160599:.github/workflows/maven_install_develop.yml
         strip_components: 3
