@@ -39,7 +39,7 @@ public class CommandKit implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		if ((Player) sender instanceof Player) {
 			Player player = (Player) sender;
-			if (command.getName().equalsIgnoreCase("city")) {
+			if (args[0].equalsIgnoreCase("city")) {
 				if (args[1].equalsIgnoreCase("create")) {
 					int xmin, xmax, zmin, zmax;
 					String name;
