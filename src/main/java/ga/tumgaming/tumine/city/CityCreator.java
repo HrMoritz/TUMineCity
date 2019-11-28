@@ -58,10 +58,10 @@ public class CityCreator {
 		}
 	}
 
-	public void removeCity(String player, String name, World world) {
+	public void removeCity(String player, World world) {
 		RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
 		RegionManager regions = container.get((com.sk89q.worldedit.world.World) world);
-
+		String name = getRegionFromPlayer(player, world).getId();
 		if (regions.getRegion(name).getOwners().contains(player)) {
 			String[] key = cities.getKeys();
 			for (int i = 0; i < key.length; i++) {
@@ -150,6 +150,11 @@ public class CityCreator {
 	public void getInvites(Player player) {
 		String checkPath = player.getUniqueId().toString();
 		List<String> list = invitations.get(checkPath);
+		String result = list.get(0);
+		for(int i = 1; i<list.size();i++) {
+			result += ", " + list.get(i);
+		}
+		player.sendMessage(result);
 	}
 	
 	public boolean isInvited(String region, String uuid) {
