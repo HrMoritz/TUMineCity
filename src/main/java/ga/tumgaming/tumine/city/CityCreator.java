@@ -40,16 +40,13 @@ public class CityCreator {
 		RegionManager regions = container.get(BukkitAdapter.adapt(world));
 
 		String checkPath = player.getUniqueId().toString();
-		//if (cities.get(checkPath) == null) {
-		boolean gh = regions.getRegion(name) == null;
-		player.sendMessage(Boolean.toString(gh));
-		player.sendMessage(Boolean.toString(regions == null));
+		if (cities.get(checkPath) == null) {
 			if (regions == null || regions.getRegion(name) == null) {
 				player.sendMessage("creating region");
 				// Create Region
 				BlockVector3 min = BlockVector3.at(_min.getBlockX(), 0, _min.getBlockZ());
 				BlockVector3 max = BlockVector3.at(_max.getBlockX(), 255, _max.getBlockZ());
-				ProtectedRegion region = new ProtectedCuboidRegion("spawn", min, max);
+				ProtectedRegion region = new ProtectedCuboidRegion(name, min, max);
 				DefaultDomain owners = region.getMembers();
 				owners.addPlayer(player.getUniqueId());
 				region.setOwners(owners);
@@ -57,7 +54,6 @@ public class CityCreator {
 				cities.set(path, name);
 				path = "Cities." + name;
 				cities.set(path, player);
-				player.sendMessage("region>>>" + region.toString());
 				regions.addRegion(region);
 				try {
 					regions.save();
@@ -67,7 +63,7 @@ public class CityCreator {
 				}
 			} else {
 				// The world has no region support or region data failed to load
-			//}
+			}
 		}
 	}
 
