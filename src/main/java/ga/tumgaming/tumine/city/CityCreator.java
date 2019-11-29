@@ -52,8 +52,6 @@ public class CityCreator {
 					String path = player.getUniqueId().toString();
 					cities.set(path, name);
 					path = "Cities." + name;
-					cities.set(path, player);
-					regions.addRegion(region);
 					try {
 						regions.save();
 					} catch (StorageException e) {
