@@ -42,6 +42,7 @@ public class CommandKit implements CommandExecutor {
 			if (command.getName().equalsIgnoreCase("city")) {
 				if (args[0].equalsIgnoreCase("create")) {
 					String name;
+					if(args[1] != null) {
 					name = args[1];
 					int xmin = 0;
 					int xmax = 0;
@@ -62,7 +63,10 @@ public class CommandKit implements CommandExecutor {
 						BlockVector3 max = BlockVector3.at(Integer.parseInt(args[4]), 0, Integer.parseInt(args[5]));
 						player.sendMessage(cityCreator.createCity(player, player.getWorld(), name, min, max));
 						return true;
-				} else if (args[0].equalsIgnoreCase("delete")) {
+				}else {
+					player.sendMessage("Please type in a name");
+				}
+				}else if (args[0].equalsIgnoreCase("delete")) {
 					player.sendMessage(cityCreator.removeCity(player.getName(), player.getWorld()));
 					return true;
 				} else if (args[0].equalsIgnoreCase("add")) {
