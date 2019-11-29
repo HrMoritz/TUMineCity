@@ -1,4 +1,4 @@
-main: ga.tumgaming.tumine.TUMineCity
+main: ga.tumgaming.tumine.tumcity.TUMineCity
 name: TUMineCity
 prefix: TUMineCity
 author: HrMoritz
