@@ -13,13 +13,11 @@ public class CommandKit implements CommandExecutor {
 
 	private static Config player;
 
-	private static Config invitations;
 
 	private static CityCreator cityCreator;
 
-	public CommandKit(Config pl, Config inv, CityCreator cit) {
+	public CommandKit(Config pl, CityCreator cit) {
 		player = pl;
-		invitations = inv;
 		cityCreator = cit;
 	}
 

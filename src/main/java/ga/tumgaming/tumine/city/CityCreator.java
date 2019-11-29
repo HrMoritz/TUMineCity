@@ -28,11 +28,9 @@ public class CityCreator {
 	private WorldEditPlugin we;
 	private WorldGuardPlugin wg;
 	private Config cities;
-	private Config invitations;
 
-	public CityCreator(Config cit, Config inv) {
+	public CityCreator(Config cit) {
 		cities = cit;
-		invitations = inv;
 	}
 
 	public String createCity(Player player, World world, String name, BlockVector3 _min, BlockVector3 _max) {
@@ -99,17 +97,17 @@ public class CityCreator {
 	public String addMember(ProtectedRegion region, String uuid) {
 		String checkPath = uuid;
 		if (cities.get(checkPath) == null) {
-			if (invitations.get(checkPath) != null) {
-				List<String> list = invitations.get(checkPath);
+			if (cities.get("invites" + checkPath) != null) {
+				List<String> list = cities.get("invites" + checkPath);
 				if(list.contains(region.getId())) {
 					return "Player has already been invited to the City";
 				}
 				list.add(region.getId());
-				invitations.set(checkPath, list);
+				cities.set("invites" + checkPath, list);
 			} else {
 				List<String> list = new ArrayList<String>();
 				list.add(region.getId());
-				invitations.set(checkPath, list);
+				cities.set("invites" + checkPath, list);
 			}
 			return "Player has been invited to the city!";
 		}else {
@@ -164,7 +162,7 @@ public class CityCreator {
 		String checkPath = uuid;
 		if (cities.get(checkPath) == null) {
 			if (isInvited(region.getId(), uuid)) {
-				invitations.set(checkPath, null);
+				cities.set("invites" + checkPath, null);
 				cities.set(checkPath, region.getId());
 				return "Joined city!";
 			}else {
@@ -196,7 +194,7 @@ public class CityCreator {
 
 	public String getInvites(Player player) {
 		String checkPath = player.getUniqueId().toString();
-		List<String> list = invitations.get(checkPath);
+		List<String> list = cities.get("invites" + checkPath);
 		String result = list.get(0);
 		for (int i = 1; i < list.size(); i++) {
 			result += ", " + list.get(i);
@@ -206,7 +204,7 @@ public class CityCreator {
 
 	public boolean isInvited(String region, String uuid) {
 		String checkPath = uuid;
-		List<String> list = invitations.get(checkPath);
+		List<String> list = cities.get("invites" + checkPath);
 		return list.contains(region);
 	}
 }
