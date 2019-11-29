@@ -64,41 +64,42 @@ public class CommandKit implements CommandExecutor {
 					BlockVector3 max = BlockVector3.at(Integer.parseInt(args[4]), 0, Integer.parseInt(args[5]));
 					player.sendMessage(cityCreator.createCity(player, player.getWorld(), name, min, max));
 					return true;
-				}
-			} else if (args[0].equalsIgnoreCase("delete")) {
-				player.sendMessage(cityCreator.removeCity(player.getName(), player.getWorld()));
-				return true;
-			} else if (args[0].equalsIgnoreCase("add")) {
-				if (cityCreator.isOwner(player, cityCreator.getRegionFromPlayer(player.getName(), player.getWorld()))) {
-					player.sendMessage(cityCreator
-							.addMember(cityCreator.getRegionFromPlayer(player.getName(), player.getWorld()), args[1]));
-				} else {
-					player.sendMessage("You are not the owner of this city!");
-				}
-				return true;
-			} else if (args[0].equalsIgnoreCase("remove")) {
-				if (cityCreator.isOwner(player,
-						cityCreator.getRegionFromPlayer(player.getUniqueId().toString(), player.getWorld()))) {
-					player.sendMessage(cityCreator.removeMember(
-							cityCreator.getRegionFromPlayer(player.getUniqueId().toString(), player.getWorld()),
-							args[1]));
-				} else {
-					player.sendMessage("You are not the owner of this city!");
-				}
-				return true;
-			} else if (args[0].equalsIgnoreCase("join")) {
-				player.sendMessage(cityCreator.joinCity(cityCreator.getRegionFromName(args[1], player.getWorld()),
-						player.getUniqueId().toString()));
-				return true;
-			} else if (args[0].equalsIgnoreCase("leave")) {
+				} else if (args[0].equalsIgnoreCase("delete")) {
+					player.sendMessage(cityCreator.removeCity(player.getName(), player.getWorld()));
+					return true;
+				} else if (args[0].equalsIgnoreCase("add")) {
+					if (cityCreator.isOwner(player,
+							cityCreator.getRegionFromPlayer(player.getName(), player.getWorld()))) {
+						player.sendMessage(cityCreator.addMember(
+								cityCreator.getRegionFromPlayer(player.getName(), player.getWorld()), args[1]));
+					} else {
+						player.sendMessage("You are not the owner of this city!");
+					}
+					return true;
+				} else if (args[0].equalsIgnoreCase("remove")) {
+					if (cityCreator.isOwner(player,
+							cityCreator.getRegionFromPlayer(player.getUniqueId().toString(), player.getWorld()))) {
+						player.sendMessage(cityCreator.removeMember(
+								cityCreator.getRegionFromPlayer(player.getUniqueId().toString(), player.getWorld()),
+								args[1]));
+					} else {
+						player.sendMessage("You are not the owner of this city!");
+					}
+					return true;
+				} else if (args[0].equalsIgnoreCase("join")) {
+					player.sendMessage(cityCreator.joinCity(cityCreator.getRegionFromName(args[1], player.getWorld()),
+							player.getUniqueId().toString()));
+					return true;
+				} else if (args[0].equalsIgnoreCase("leave")) {
 
-				player.sendMessage(cityCreator.leaveCity(
-						cityCreator.getRegionFromPlayer(player.getUniqueId().toString(), player.getWorld()),
-						player.getUniqueId().toString()));
-				return true;
-			} else if (args[0].equalsIgnoreCase("invites")) {
-				player.sendMessage(cityCreator.getInvites(player));
-				return true;
+					player.sendMessage(cityCreator.leaveCity(
+							cityCreator.getRegionFromPlayer(player.getUniqueId().toString(), player.getWorld()),
+							player.getUniqueId().toString()));
+					return true;
+				} else if (args[0].equalsIgnoreCase("invites")) {
+					player.sendMessage(cityCreator.getInvites(player));
+					return true;
+				}
 			}
 		}
 		return false;
