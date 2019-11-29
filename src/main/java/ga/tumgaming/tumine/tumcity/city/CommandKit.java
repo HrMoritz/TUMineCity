@@ -1,4 +1,4 @@
-package ga.tumgaming.tumine.city;
+package ga.tumgaming.tumine.tumcity.city;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 
 import com.sk89q.worldedit.math.BlockVector3;
 
-import ga.tumgaming.tumine.util.Config;
+import ga.tumgaming.tumine.tumcity.util.Config;
 
 public class CommandKit implements CommandExecutor {
 

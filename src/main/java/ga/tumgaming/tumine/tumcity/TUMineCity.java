@@ -1,8 +1,9 @@
-package ga.tumgaming.tumine;
+package ga.tumgaming.tumine.tumcity;
 
-import ga.tumgaming.tumine.city.CityCreator;
-import ga.tumgaming.tumine.city.CommandKit;
-import ga.tumgaming.tumine.util.Config;
+import ga.tumgaming.tumine.tumcity.city.CityCreator;
+import ga.tumgaming.tumine.tumcity.city.CommandKit;
+import ga.tumgaming.tumine.tumcity.util.Config;
+
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;

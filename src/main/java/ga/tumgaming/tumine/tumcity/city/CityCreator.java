@@ -1,4 +1,4 @@
-package ga.tumgaming.tumine.city;
+package ga.tumgaming.tumine.tumcity.city;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +22,7 @@ import com.sk89q.worldguard.protection.regions.ProtectedCuboidRegion;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import com.sk89q.worldguard.protection.regions.RegionContainer;
 
-import ga.tumgaming.tumine.util.Config;
+import ga.tumgaming.tumine.tumcity.util.Config;
 
 public class CityCreator {
 

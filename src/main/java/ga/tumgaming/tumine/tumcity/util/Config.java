@@ -1,4 +1,4 @@
-package ga.tumgaming.tumine.util;
+package ga.tumgaming.tumine.tumcity.util;
 
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
