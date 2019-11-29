@@ -74,7 +74,9 @@ public class CityCreator {
 		RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
 		RegionManager regions = container.get(BukkitAdapter.adapt(world));
 		String name = getRegionFromPlayer(player.getUniqueId().toString(), world).getId();
+		player.sendMessage("Start");
 		if (regions.getRegion(name).getOwners().contains(player.getName())) {
+			player.sendMessage("you owner");
 			if (regions.getRegion(name) != null) {
 				String[] key = cities.getKeys();
 				for (int i = 0; i < key.length; i++) {
@@ -84,10 +86,10 @@ public class CityCreator {
 				}
 				regions.removeRegion(name);
 				return "City has been removed";
-			}else {
+			} else {
 				return "This city does not exist!";
 			}
-		}else {
+		} else {
 			return "You are not an owner of this city!";
 		}
 	}
@@ -97,7 +99,7 @@ public class CityCreator {
 		if (cities.get(checkPath) == null) {
 			if (cities.get("invites" + checkPath) != null) {
 				List<String> list = cities.get("invites" + checkPath);
-				if(list.contains(region.getId())) {
+				if (list.contains(region.getId())) {
 					return "Player has already been invited to the City";
 				}
 				list.add(region.getId());
@@ -108,7 +110,7 @@ public class CityCreator {
 				cities.set("invites" + checkPath, list);
 			}
 			return "Player has been invited to the city!";
-		}else {
+		} else {
 			return "Player is already in a city";
 		}
 	}
@@ -119,13 +121,13 @@ public class CityCreator {
 			boolean played = false;
 			OfflinePlayer[] offPlayers = Bukkit.getOfflinePlayers();
 			for (OfflinePlayer offlinePlayer : offPlayers) {
-				if(offlinePlayer.getName() == name) {
+				if (offlinePlayer.getName() == name) {
 					uuid = offlinePlayer.getUniqueId().toString();
 					played = true;
 					break;
 				}
 			}
-			if(!played) {
+			if (!played) {
 				return "This Player has not played on this server yet!";
 			}
 		} else {
@@ -138,10 +140,10 @@ public class CityCreator {
 				members.removePlayer(uuid);
 				region.setMembers(members);
 				return "Removed member!";
-			}else {
+			} else {
 				return "That player is not a member of this city";
 			}
-		}else {
+		} else {
 			return "This city does not exist";
 		}
 	}
@@ -151,7 +153,7 @@ public class CityCreator {
 		if (cities.get(checkPath) != null) {
 			cities.set(checkPath, null);
 			return "You left the city!";
-		}else {
+		} else {
 			return "You are not in a city!";
 		}
 	}
@@ -163,10 +165,10 @@ public class CityCreator {
 				cities.set("invites" + checkPath, null);
 				cities.set(checkPath, region.getId());
 				return "Joined city!";
-			}else {
+			} else {
 				return "You are not invited to that city!";
 			}
-		}else {
+		} else {
 			return "That city does not exist!";
 		}
 	}
@@ -187,7 +189,7 @@ public class CityCreator {
 	}
 
 	public boolean isOwner(Player player, ProtectedRegion region) {
-		return region.getOwners().contains(player.getUniqueId());
+		return region.getOwners().contains(player.getName());
 	}
 
 	public String getInvites(Player player) {
