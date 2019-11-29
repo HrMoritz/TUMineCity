@@ -47,7 +47,7 @@ public class CityCreator {
 					BlockVector3 max = BlockVector3.at(_max.getBlockX(), 255, _max.getBlockZ());
 					ProtectedRegion region = new ProtectedCuboidRegion(name, min, max);
 					DefaultDomain owners = region.getMembers();
-					owners.addPlayer(player.getUniqueId());
+					owners.addPlayer(player.getName());
 					region.setOwners(owners);
 					String path = player.getUniqueId().toString();
 					cities.set(path, name);
