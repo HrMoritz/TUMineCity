@@ -179,7 +179,7 @@ public class CityCreator {
 		String name = cities.get(uuid);
 		RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
 		RegionManager regions = container.get(BukkitAdapter.adapt(world));
-
+		Bukkit.getServer().getConsoleSender().sendMessage(name);
 		return regions.getRegion(name);
 	}
 
