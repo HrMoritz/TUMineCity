@@ -70,11 +70,11 @@ public class CityCreator {
 		}
 	}
 
-	public String removeCity(String player, World world) {
+	public String removeCity(Player player, World world) {
 		RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
 		RegionManager regions = container.get(BukkitAdapter.adapt(world));
-		String name = getRegionFromPlayer(player, world).getId();
-		if (regions.getRegion(name).getOwners().contains(player)) {
+		String name = getRegionFromPlayer(player.getUniqueId().toString(), world).getId();
+		if (regions.getRegion(name).getOwners().contains(player.getName())) {
 			if (regions.getRegion(name) != null) {
 				String[] key = cities.getKeys();
 				for (int i = 0; i < key.length; i++) {

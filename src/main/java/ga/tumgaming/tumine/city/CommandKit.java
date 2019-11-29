@@ -63,7 +63,7 @@ public class CommandKit implements CommandExecutor {
 					player.sendMessage(cityCreator.createCity(player, player.getWorld(), name, min, max));
 					return true;
 				} else if (args[0].equalsIgnoreCase("delete")) {
-					player.sendMessage(cityCreator.removeCity(player.getName(), player.getWorld()));
+					player.sendMessage(cityCreator.removeCity(player, player.getWorld()));
 					return true;
 				} else if (args[0].equalsIgnoreCase("add")) {
 					if (cityCreator.isOwner(player,
