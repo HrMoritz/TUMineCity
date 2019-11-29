@@ -2,6 +2,7 @@ package ga.tumgaming.tumine.city;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
@@ -78,12 +79,13 @@ public class CityCreator {
 		if (regions.getRegion(name).getOwners().contains(player.getName())) {
 			player.sendMessage("you owner");
 			if (regions.getRegion(name) != null) {
-				String[] key = cities.getKeys();
-				for (int i = 0; i < key.length; i++) {
-					if (cities.get(key[i]) == name) {
-						cities.set(key[i], null);
-					}
+				Set <String> key = cities.getKeys();
+				for (String s : key) {
+				    if(cities.get(s) == name) {
+				    	cities.set(s, null);
+				    }
 				}
+				
 				regions.removeRegion(name);
 				return "City has been removed";
 			} else {
