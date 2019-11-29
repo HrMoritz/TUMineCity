@@ -79,13 +79,13 @@ public class CityCreator {
 		if (regions.getRegion(name).getOwners().contains(player.getName())) {
 			player.sendMessage("you owner");
 			if (regions.getRegion(name) != null) {
-				Set <String> key = cities.getCities();
+				Set<String> key = cities.getCities();
 				for (String s : key) {
-				    if(cities.get(s) == name) {
-				    	cities.set(s, null);
-				    }
+					if (cities.get(s) == name) {
+						cities.set(s, null);
+					}
 				}
-				
+
 				regions.removeRegion(name);
 				return "City has been removed";
 			} else {
@@ -178,9 +178,15 @@ public class CityCreator {
 	public ProtectedRegion getRegionFromPlayer(String uuid, World world) {
 		String name = cities.get(uuid);
 		RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
-		RegionManager regions = container.get(BukkitAdapter.adapt(world));
-		Bukkit.getServer().getConsoleSender().sendMessage(name);
-		return regions.getRegion(name);
+		if (container != null) {
+			RegionManager regions = container.get(BukkitAdapter.adapt(world));
+			if (regions != null) {
+				Bukkit.getServer().getConsoleSender().sendMessage(name);
+				Bukkit.getServer().getConsoleSender().sendMessage(uuid);
+				return regions.getRegion(name);
+			}
+		}
+		return null;
 	}
 
 	public ProtectedRegion getRegionFromName(String name, World world) {
