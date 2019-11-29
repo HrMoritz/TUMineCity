@@ -41,15 +41,27 @@ public class CommandKit implements CommandExecutor {
 			Player player = (Player) sender;
 			if (command.getName().equalsIgnoreCase("city")) {
 				if (args[0].equalsIgnoreCase("create")) {
-					int xmin, xmax, zmin, zmax;
 					String name;
 					name = args[1];
-					if (isNumeric(args[2]) && isNumeric(args[3]) && isNumeric(args[4]) && isNumeric(args[5])) {
+					int xmin = 0;
+					int xmax = 0;
+					int zmin = 0;
+					int zmax = 0;
+					
+					try {
+						xmin = Integer.parseInt(args[2]);
+						xmax = Integer.parseInt(args[3]);
+						zmin = Integer.parseInt(args[4]);
+						zmax = Integer.parseInt(args[5]);
+					} catch (NumberFormatException nfe) {
+						player.sendMessage("Please type in integers!");
+						return false;
+					}
+					
 						BlockVector3 min = BlockVector3.at(Integer.parseInt(args[2]), 0, Integer.parseInt(args[3]));
 						BlockVector3 max = BlockVector3.at(Integer.parseInt(args[4]), 0, Integer.parseInt(args[5]));
 						player.sendMessage(cityCreator.createCity(player, player.getWorld(), name, min, max));
 						return true;
-					}
 				} else if (args[0].equalsIgnoreCase("delete")) {
 					player.sendMessage(cityCreator.removeCity(player.getName(), player.getWorld()));
 					return true;
