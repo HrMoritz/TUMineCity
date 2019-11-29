@@ -81,7 +81,7 @@ public class CityCreator {
 				Set<String> key = cities.getCities();
 				for (String s : key) {
 					if (cities.get(s) == name) {
-						cities.set(s, null);
+						cities.delete(s);
 					}
 				}
 
@@ -152,7 +152,7 @@ public class CityCreator {
 	public String leaveCity(ProtectedRegion region, String uuid) {
 		String checkPath = UUID.fromString(uuid).toString();
 		if (cities.get(checkPath) != null) {
-			cities.set(checkPath, null);
+			cities.delete(checkPath);
 			return "You left the city!";
 		} else {
 			return "You are not in a city!";
@@ -163,7 +163,7 @@ public class CityCreator {
 		String checkPath = uuid;
 		if (cities.get(checkPath) == null) {
 			if (isInvited(region.getId(), uuid)) {
-				cities.set("invites" + checkPath, null);
+				cities.delete("invites" + checkPath);
 				cities.set(checkPath, region.getId());
 				return "Joined city!";
 			} else {

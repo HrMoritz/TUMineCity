@@ -11,13 +11,10 @@ import ga.tumgaming.tumine.tumcity.util.Config;
 
 public class CommandKit implements CommandExecutor {
 
-	private static Config player;
-
 
 	private static CityCreator cityCreator;
 
-	public CommandKit(Config pl, CityCreator cit) {
-		player = pl;
+	public CommandKit( CityCreator cit) {
 		cityCreator = cit;
 	}
 

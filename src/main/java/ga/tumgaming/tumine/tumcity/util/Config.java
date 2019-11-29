@@ -37,6 +37,11 @@ public class Config {
         }
     }
 
+    public void delete(String path) {
+        config.set(path, null);
+        save();
+    }
+    
     public <T> T get(String path) {
         T value = (T) config.get(path);
         reload();

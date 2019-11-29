@@ -33,7 +33,7 @@ public class TUMineCity extends JavaPlugin {
         worldGuardPlugin = getWorldGuard();
         player = new Config(this, "player");
         cityCreator = new CityCreator(player);
-        getCommand("city").setExecutor(new CommandKit(player, cityCreator));
+        getCommand("city").setExecutor(new CommandKit(cityCreator));
         registerEvents();
 
 
