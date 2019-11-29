@@ -79,7 +79,7 @@ public class CityCreator {
 		if (regions.getRegion(name).getOwners().contains(player.getName())) {
 			player.sendMessage("you owner");
 			if (regions.getRegion(name) != null) {
-				Set <String> key = cities.getKeys();
+				Set <String> key = cities.getCities();
 				for (String s : key) {
 				    if(cities.get(s) == name) {
 				    	cities.set(s, null);

@@ -53,7 +53,7 @@ public class Config {
         config = YamlConfiguration.loadConfiguration(file);
     }
     
-    public Set <String> getKeys() {
+    public Set <String> getCities() {
         return config.getKeys(false);
     }
 }
