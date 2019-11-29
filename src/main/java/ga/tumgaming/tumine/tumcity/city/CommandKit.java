@@ -62,8 +62,8 @@ public class CommandKit implements CommandExecutor {
 					BlockVector3 max = BlockVector3.at(Integer.parseInt(args[4]), 0, Integer.parseInt(args[5]));
 					player.sendMessage(cityCreator.createCity(player, player.getWorld(), name, min, max));
 					return true;
-				} else if (args[0].equalsIgnoreCase("delete")) {
-					player.sendMessage(cityCreator.removeCity(player, player.getWorld()));
+				} else if (args[0].equalsIgnoreCase("delete") && args.length == 2) {
+					player.sendMessage(cityCreator.removeCity(player, player.getWorld(), args[1]));
 					return true;
 				} else if (args[0].equalsIgnoreCase("add")) {
 					if (cityCreator.isOwner(player,

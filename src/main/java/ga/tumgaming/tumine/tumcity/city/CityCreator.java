@@ -71,10 +71,9 @@ public class CityCreator {
 		}
 	}
 
-	public String removeCity(Player player, World world) {
+	public String removeCity(Player player, World world, String name) {
 		RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
 		RegionManager regions = container.get(BukkitAdapter.adapt(world));
-		String name = getRegionFromPlayer(player.getUniqueId().toString(), world).getId();
 		player.sendMessage("Start");
 		if (regions.getRegion(name).getOwners().contains(player.getName())) {
 			player.sendMessage("you owner");
