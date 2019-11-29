@@ -5,6 +5,7 @@ import org.bukkit.plugin.Plugin;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Set;
 
 public class Config {
 
@@ -52,7 +53,7 @@ public class Config {
         config = YamlConfiguration.loadConfiguration(file);
     }
     
-    public <T> T getKeys() {
-        return (T) config.getKeys(false);
+    public Set <String> getKeys() {
+        return config.getKeys(false);
     }
 }
