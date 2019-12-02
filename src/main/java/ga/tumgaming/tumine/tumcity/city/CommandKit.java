@@ -94,6 +94,8 @@ public class CommandKit implements CommandExecutor {
 				} else if (args[0].equalsIgnoreCase("invites")) {
 					player.sendMessage(cityCreator.getInvites(player));
 					return true;
+				}else if(args[0].equalsIgnoreCase("info")) {
+					player.sendMessage(cityCreator.getRegionFromPlayer(player.getUniqueId().toString(), player.getWorld()).getId());
 				}
 			}
 		}
