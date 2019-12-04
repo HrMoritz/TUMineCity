@@ -32,8 +32,9 @@ public class CityCreator {
 	private WorldGuardPlugin wg;
 	private Config cities;
 
-	public CityCreator(Config cit) {
+	public CityCreator(Config cit, WorldGuardPlugin _wg) {
 		cities = cit;
+		wg = _wg;
 	}
 
 	public String createCity(Player player, World world, String name, BlockVector3 _min, BlockVector3 _max) {
