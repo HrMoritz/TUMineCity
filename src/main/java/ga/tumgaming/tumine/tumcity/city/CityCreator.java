@@ -14,6 +14,7 @@ import org.bukkit.entity.Player;
 import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import com.sk89q.worldedit.math.BlockVector3;
+import com.sk89q.worldguard.LocalPlayer;
 import com.sk89q.worldguard.WorldGuard;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.domains.DefaultDomain;
@@ -43,7 +44,6 @@ public class CityCreator {
 		if (cities.get(checkPath) == null) {
 			if (regions != null) {
 				if (regions.getRegion(name) == null) {
-
 					// Create Region
 					BlockVector3 min = BlockVector3.at(_min.getBlockX(), 0, _min.getBlockZ());
 					BlockVector3 max = BlockVector3.at(_max.getBlockX(), 255, _max.getBlockZ());
@@ -51,16 +51,22 @@ public class CityCreator {
 					DefaultDomain owners = region.getOwners();
 					owners.addPlayer(player.getName());
 					region.setOwners(owners);
+					if(!regions.overlapsUnownedRegion(region, (LocalPlayer) player)){
+					
 					String path = player.getUniqueId().toString();
 					cities.set(path, name);
 					regions.addRegion(region);
+					
+					//check if city overlaps with other region
 					try {
 						regions.save();
 					} catch (StorageException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 					return "City has been created!";
+					}else {
+						return "City overlaps with another City";
+					}
 				} else {
 					return "A city with this name already exists!";
 				}
