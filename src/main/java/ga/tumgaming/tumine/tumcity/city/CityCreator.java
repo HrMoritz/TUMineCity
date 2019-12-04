@@ -191,11 +191,17 @@ public class CityCreator {
 		String checkPath = player.getUniqueId().toString();
 		if (cities.get(checkPath) != null) {
 			if(region.getOwners().contains(player.getName())) {
-				cities.delete(checkPath);
-				DefaultDomain owners = region.getOwners();
-				owners.removePlayer(player.getName());
+				
 				DefaultDomain members = region.getMembers();
-				owners.addPlayer(members.getPlayers().iterator().next());
+				String newOwner = members.getPlayers().iterator().next();
+				if(newOwner == null) {
+					return ChatColor.RED + "There is no other member in this city. You might want to try /city delete [name]";
+				}
+					cities.delete(checkPath);
+					DefaultDomain owners = region.getOwners();
+					owners.removePlayer(player.getName());
+				
+				owners.addPlayer(newOwner);
 				region.setOwners(owners);
 				return "You left the city " + region.getId() + "!";
 			}else {
