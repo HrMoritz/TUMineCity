@@ -69,10 +69,10 @@ public class TUMineCity extends JavaPlugin {
 	public static WorldGuardPlugin getWorldGuard() {
 		Plugin wgp = plugin.getServer().getPluginManager().getPlugin("WorldGuard");
 		if (wgp == null || wgp instanceof WorldGuardPlugin) {
-			Bukkit.getServer().broadcastMessage("test");
+			Bukkit.getServer().getConsoleSender().sendMessage("test");
 			return null;
 		}
-		Bukkit.getServer().broadcastMessage("test2");
+		Bukkit.getServer().getConsoleSender().sendMessage("test2");
 		return (WorldGuardPlugin) wgp;
 	}
 
