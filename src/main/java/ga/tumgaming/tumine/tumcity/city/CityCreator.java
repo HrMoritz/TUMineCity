@@ -90,7 +90,7 @@ public class CityCreator {
 			if (regions.getRegion(name).getOwners().contains(player.getName())) {
 				Set<String> key = cities.getCities();
 				for (String s : key) {
-					if (UUID.fromString(s) != null) {
+					if (isUUID(s)) {
 						String val = (String) cities.get(s);
 						if (val.equalsIgnoreCase(name)) {
 							cities.delete(s);
@@ -289,5 +289,14 @@ public class CityCreator {
 			return true;
 		}
 		return false;
+	}
+	
+	public boolean isUUID(String string) {
+	    try {
+	        UUID.fromString(string);
+	        return true;
+	    } catch (Exception ex) {
+	        return false;
+	    }
 	}
 }
