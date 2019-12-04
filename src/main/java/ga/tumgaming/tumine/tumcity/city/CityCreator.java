@@ -90,9 +90,11 @@ public class CityCreator {
 			if (regions.getRegion(name).getOwners().contains(player.getName())) {
 				Set<String> key = cities.getCities();
 				for (String s : key) {
-					String val = (String) cities.get(s);
-					if (val.equalsIgnoreCase(name)) {
-						cities.delete(s);
+					if (UUID.fromString(s) != null) {
+						String val = (String) cities.get(s);
+						if (val.equalsIgnoreCase(name)) {
+							cities.delete(s);
+						}
 					}
 				}
 
