@@ -25,6 +25,7 @@ import com.sk89q.worldguard.protection.regions.ProtectedCuboidRegion;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import com.sk89q.worldguard.protection.regions.RegionContainer;
 
+import ga.tumgaming.tumine.tumcity.TUMineCity;
 import ga.tumgaming.tumine.tumcity.util.Config;
 
 public class CityCreator {
@@ -143,7 +144,7 @@ public class CityCreator {
 				cities.set("invites." + checkPath, invite);
 			}
 			if(isOnline) {
-				Bukkit.getPlayer(UUID.fromString(uuid)).sendMessage("You have been invited to join " + region.getId() + "!");
+				Bukkit.getPlayer(UUID.fromString(uuid)).sendMessage(TUMineCity.getPrefix() + "You have been invited to join " + region.getId() + "!");
 			}
 			return name + " has been invited to the city!";
 		} else {
@@ -196,13 +197,13 @@ public class CityCreator {
 				DefaultDomain members = region.getMembers();
 				owners.addPlayer(members.getPlayers().iterator().next());
 				region.setOwners(owners);
-				return "You left the city!";
+				return "You left the city " + region.getId() + "!";
 			}else {
 				cities.delete(checkPath);
 				DefaultDomain members = region.getMembers();
 				members.removePlayer(player.getName());
 				region.setMembers(members);
-				return "You left the city!";
+				return "You left the city " + region.getId() + "!";
 			}
 			
 		} else {
@@ -220,7 +221,7 @@ public class CityCreator {
 				region.setMembers(members);
 				cities.delete("invites." + checkPath);
 				cities.set(checkPath, region.getId());
-				return "Joined "+ region.getId() + "!";
+				return "Joined the city "+ region.getId() + "!";
 			} else {
 				return ChatColor.RED + "You are not invited to join" + region.getId() + "!";
 			}
