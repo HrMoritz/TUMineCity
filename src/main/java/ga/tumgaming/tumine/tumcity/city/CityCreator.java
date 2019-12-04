@@ -97,7 +97,12 @@ public class CityCreator {
 						}
 					}
 				}
-
+				/*
+				 * 
+				 * 	NEED TO REMOVE INVITES OF CITY THAT IS GOING TO BE DESTROYED
+				 * 
+				 * 
+				 */
 				regions.removeRegion(name);
 				return "City has been removed";
 			} else {

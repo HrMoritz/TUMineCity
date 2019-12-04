@@ -106,7 +106,7 @@ public class CommandKit implements CommandExecutor {
 					}
 				} else if (args[0].equalsIgnoreCase("invites")) {
 
-					player.sendMessage(TUMineCity.getPrefix() + cityCreator.getInvites(player));
+					player.sendMessage(TUMineCity.getPrefix() + "You have been invited to the following cities: " + cityCreator.getInvites(player));
 					return true;
 				} else if (args[0].equalsIgnoreCase("info")) {
 					if (cityCreator.getRegionFromPlayer(player.getUniqueId().toString(), player.getWorld()) != null) {
