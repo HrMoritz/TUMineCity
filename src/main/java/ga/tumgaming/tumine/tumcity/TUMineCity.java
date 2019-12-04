@@ -29,8 +29,10 @@ public class TUMineCity extends JavaPlugin {
     
     @Override
     public void onEnable() {
+    	
         this.plugin = this;
         worldGuardPlugin = getWorldGuard();
+        Bukkit.getServer().broadcastMessage(worldGuardPlugin.toString());
         player = new Config(this, "player");
         cityCreator = new CityCreator(player, worldGuardPlugin);
         getCommand("city").setExecutor(new CommandKit(cityCreator));
