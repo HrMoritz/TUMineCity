@@ -66,12 +66,12 @@ public class CityCreator {
 					} catch (StorageException e) {
 						e.printStackTrace();
 					}
-					return "City has been created!";
+					return "You created the city " + name + "!";
 					}else {
-						return ChatColor.RED + "City overlaps with another City";
+						return ChatColor.RED + "Selection overlaps with another City";
 					}
 				} else {
-					return ChatColor.RED + "A city with this name already exists!";
+					return ChatColor.RED + "There is already a city with this name!";
 				}
 			} else {
 				return ChatColor.RED + "ERROR: 2001! Report this to an Admin!";
@@ -98,7 +98,7 @@ public class CityCreator {
 				regions.removeRegion(name);
 				return "City has been removed";
 			} else {
-				return ChatColor.RED + "You are not an owner of this city!";
+				return ChatColor.RED + "You are not the owner of this city!";
 			}
 		} else {
 			return ChatColor.RED + "This city does not exist!";
@@ -106,7 +106,7 @@ public class CityCreator {
 	}
 
 	public String addMember(ProtectedRegion region, String name) {
-
+		boolean isOnline = false;
 		String uuid = "";
 		if (Bukkit.getPlayer(name) == null) {
 			boolean played = false;
@@ -123,6 +123,7 @@ public class CityCreator {
 			}
 		} else {
 			uuid = Bukkit.getPlayer(name).getUniqueId().toString();
+			isOnline = true;
 		}
 
 		String checkPath = uuid;
@@ -133,7 +134,7 @@ public class CityCreator {
 				ArrayList<String> invites = new ArrayList<String>();
 				Collections.addAll(invites, inviteArray);
 				if (invites.contains(region.getId())) {
-					return ChatColor.RED + "Player has already been invited to the City";
+					return ChatColor.RED + name + " has already been invited to this City";
 				}
 				allInvites = allInvites + "," + region.getId();
 				cities.set("invites." + checkPath, allInvites);
@@ -141,9 +142,12 @@ public class CityCreator {
 				String invite = region.getId();
 				cities.set("invites." + checkPath, invite);
 			}
-			return "Player has been invited to the city!";
+			if(isOnline) {
+				Bukkit.getPlayer(uuid).sendMessage("You have been invited to join " + region.getId() + "!");
+			}
+			return name + " has been invited to the city!";
 		} else {
-			return ChatColor.RED + "Player is already in a city";
+			return ChatColor.RED + name + " is already in a city";
 		}
 	}
 
@@ -175,21 +179,32 @@ public class CityCreator {
 				region.setMembers(members);
 				return "Removed member!";
 			} else {
-				return ChatColor.RED + "That player is not a member of this city";
+				return ChatColor.RED + name + " is not a member of this city";
 			}
 		} else {
-			return ChatColor.RED + "That player is not a member of this city";
+			return ChatColor.RED + name + " is not a member of this city";
 		}
 	}
 
 	public String leaveCity(ProtectedRegion region, Player player) {
 		String checkPath = player.getUniqueId().toString();
 		if (cities.get(checkPath) != null) {
-			cities.delete(checkPath);
-			DefaultDomain members = region.getMembers();
-			members.removePlayer(player.getName());
-			region.setMembers(members);
-			return "You left the city!";
+			if(region.getOwners().contains(player.getName())) {
+				cities.delete(checkPath);
+				DefaultDomain owners = region.getOwners();
+				owners.removePlayer(player.getName());
+				DefaultDomain members = region.getMembers();
+				owners.addPlayer(members.getPlayers().iterator().next());
+				region.setOwners(owners);
+				return "You left the city!";
+			}else {
+				cities.delete(checkPath);
+				DefaultDomain members = region.getMembers();
+				members.removePlayer(player.getName());
+				region.setMembers(members);
+				return "You left the city!";
+			}
+			
 		} else {
 			return ChatColor.RED + "You are not in a city!";
 		}
@@ -205,9 +220,9 @@ public class CityCreator {
 				region.setMembers(members);
 				cities.delete("invites." + checkPath);
 				cities.set(checkPath, region.getId());
-				return "Joined city!";
+				return "Joined "+ region.getId() + "!";
 			} else {
-				return ChatColor.RED + "You are not invited to that city!";
+				return ChatColor.RED + "You are not invited to join" + region.getId() + "!";
 			}
 		} else {
 			return ChatColor.RED + "You are already in a city";

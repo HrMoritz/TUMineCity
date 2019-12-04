@@ -84,7 +84,7 @@ public class TUMineCity extends JavaPlugin {
 	}
 	
 	public static String getPrefix() {
-		return new String(ChatColor.DARK_GRAY + "[" + ChatColor.BLUE + "TUMine" + ChatColor.DARK_GRAY + "]" + ChatColor.WHITE);
+		return new String(ChatColor.DARK_GRAY + "[" + ChatColor.BLUE + "TUMine" + ChatColor.DARK_GRAY + "]" + ChatColor.WHITE + " ");
 	}
 
 }
