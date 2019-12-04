@@ -1,5 +1,6 @@
 package ga.tumgaming.tumine.tumcity.city;
 
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -51,7 +52,7 @@ public class CommandKit implements CommandExecutor {
 						zmin = Integer.parseInt(args[4]);
 						zmax = Integer.parseInt(args[5]);
 					} catch (NumberFormatException nfe) {
-						player.sendMessage(TUMineCity.getPrefix() + "&cPlease type in integers!");
+						player.sendMessage(TUMineCity.getPrefix() + ChatColor.RED + "Please type in integers!");
 						return false;
 					}
 
@@ -70,11 +71,11 @@ public class CommandKit implements CommandExecutor {
 									cityCreator.getRegionFromPlayer(player.getUniqueId().toString(), player.getWorld()),
 									args[1]));
 						} else {
-							player.sendMessage(TUMineCity.getPrefix() + "&cYou are not the owner of this city!");
+							player.sendMessage(TUMineCity.getPrefix() + ChatColor.RED + "You are not the owner of this city!");
 						}
 						return true;
 					} else {
-						player.sendMessage(TUMineCity.getPrefix() + "&cYou are not in a city!");
+						player.sendMessage(TUMineCity.getPrefix() + ChatColor.RED + "You are not in a city!");
 					}
 				} else if (args[0].equalsIgnoreCase("remove")) {
 					if (cityCreator.getRegionFromPlayer(player.getUniqueId().toString(), player.getWorld()) != null) {
@@ -84,11 +85,11 @@ public class CommandKit implements CommandExecutor {
 									cityCreator.getRegionFromPlayer(player.getUniqueId().toString(), player.getWorld()),
 									args[1]));
 						} else {
-							player.sendMessage(TUMineCity.getPrefix() + "&cYou are not the owner of this city!");
+							player.sendMessage(TUMineCity.getPrefix() + ChatColor.RED + "You are not the owner of this city!");
 						}
 						return true;
 					} else {
-						player.sendMessage(TUMineCity.getPrefix() + "&cYou are not in a city");
+						player.sendMessage(TUMineCity.getPrefix() + ChatColor.RED + "You are not in a city");
 					}
 				} else if (args[0].equalsIgnoreCase("join")) {
 					player.sendMessage(TUMineCity.getPrefix() + cityCreator.joinCity(cityCreator.getRegionFromName(args[1], player.getWorld()),
@@ -101,7 +102,7 @@ public class CommandKit implements CommandExecutor {
 								player));
 						return true;
 					} else {
-						player.sendMessage(TUMineCity.getPrefix() + "&cYou are not in a city");
+						player.sendMessage(TUMineCity.getPrefix() + ChatColor.RED + "You are not in a city");
 					}
 				} else if (args[0].equalsIgnoreCase("invites")) {
 
@@ -112,7 +113,7 @@ public class CommandKit implements CommandExecutor {
 					player.sendMessage(TUMineCity.getPrefix() + cityCreator
 							.getRegionFromPlayer(player.getUniqueId().toString(), player.getWorld()).getId());
 				}else{
-					player.sendMessage(TUMineCity.getPrefix() + "&cYou are not in a city!");}
+					player.sendMessage(TUMineCity.getPrefix() + ChatColor.RED + "You are not in a city!");}
 				}
 			}
 		}

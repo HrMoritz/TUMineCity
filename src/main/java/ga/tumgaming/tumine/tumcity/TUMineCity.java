@@ -5,6 +5,7 @@ import ga.tumgaming.tumine.tumcity.city.CommandKit;
 import ga.tumgaming.tumine.tumcity.util.Config;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -83,7 +84,7 @@ public class TUMineCity extends JavaPlugin {
 	}
 	
 	public static String getPrefix() {
-		return new String("&8[&9TUMine&8]&7 ");
+		return new String(ChatColor.DARK_GRAY + "[" + ChatColor.BLUE + "TUMine" + ChatColor.DARK_GRAY + "]" + ChatColor.WHITE);
 	}
 
 }
