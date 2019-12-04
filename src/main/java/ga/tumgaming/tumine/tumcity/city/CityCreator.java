@@ -51,7 +51,8 @@ public class CityCreator {
 					DefaultDomain owners = region.getOwners();
 					owners.addPlayer(player.getName());
 					region.setOwners(owners);
-					if(!regions.overlapsUnownedRegion(region, (LocalPlayer) player)){
+					LocalPlayer localplayer = wg.wrapPlayer(player);
+					if(!regions.overlapsUnownedRegion(region, localplayer)){
 					
 					String path = player.getUniqueId().toString();
 					cities.set(path, name);
