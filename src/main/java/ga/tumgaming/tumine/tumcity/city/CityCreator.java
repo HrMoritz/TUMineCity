@@ -55,20 +55,20 @@ public class CityCreator {
 					owners.addPlayer(player.getName());
 					region.setOwners(owners);
 					LocalPlayer localplayer = wg.wrapPlayer(player);
-					if(!regions.overlapsUnownedRegion(region, localplayer)){
-					
-					String path = player.getUniqueId().toString();
-					cities.set(path, name);
-					regions.addRegion(region);
-					
-					//check if city overlaps with other region
-					try {
-						regions.save();
-					} catch (StorageException e) {
-						e.printStackTrace();
-					}
-					return "You created the city " + name + "!";
-					}else {
+					if (!regions.overlapsUnownedRegion(region, localplayer)) {
+
+						String path = player.getUniqueId().toString();
+						cities.set(path, name);
+						regions.addRegion(region);
+
+						// check if city overlaps with other region
+						try {
+							regions.save();
+						} catch (StorageException e) {
+							e.printStackTrace();
+						}
+						return "You created the city " + name + "!";
+					} else {
 						return ChatColor.RED + "Selection overlaps with another City";
 					}
 				} else {
@@ -85,9 +85,9 @@ public class CityCreator {
 	public String removeCity(Player player, World world, String name) {
 		RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
 		RegionManager regions = container.get(BukkitAdapter.adapt(world));
-		
-			if (regions.getRegion(name) != null) {
-				if (regions.getRegion(name).getOwners().contains(player.getName())) {
+
+		if (regions.getRegion(name) != null) {
+			if (regions.getRegion(name).getOwners().contains(player.getName())) {
 				Set<String> key = cities.getCities();
 				for (String s : key) {
 					String val = (String) cities.get(s);
@@ -95,7 +95,7 @@ public class CityCreator {
 						cities.delete(s);
 					}
 				}
-				
+
 				regions.removeRegion(name);
 				return "City has been removed";
 			} else {
@@ -113,7 +113,7 @@ public class CityCreator {
 			boolean played = false;
 			OfflinePlayer[] offPlayers = Bukkit.getOfflinePlayers();
 			for (OfflinePlayer offlinePlayer : offPlayers) {
-				if (offlinePlayer.getName().equals( name)) {
+				if (offlinePlayer.getName().equals(name)) {
 					uuid = offlinePlayer.getUniqueId().toString();
 					played = true;
 					break;
@@ -143,8 +143,9 @@ public class CityCreator {
 				String invite = region.getId();
 				cities.set("invites." + checkPath, invite);
 			}
-			if(isOnline) {
-				Bukkit.getPlayer(UUID.fromString(uuid)).sendMessage(TUMineCity.getPrefix() + "You have been invited to join " + region.getId() + "!");
+			if (isOnline) {
+				Bukkit.getPlayer(UUID.fromString(uuid))
+						.sendMessage(TUMineCity.getPrefix() + "You have been invited to join " + region.getId() + "!");
 			}
 			return name + " has been invited to the city!";
 		} else {
@@ -190,52 +191,53 @@ public class CityCreator {
 	public String leaveCity(ProtectedRegion region, Player player) {
 		String checkPath = player.getUniqueId().toString();
 		if (cities.get(checkPath) != null) {
-			if(region.getOwners().contains(player.getName())) {
-				
+			if (region.getOwners().contains(player.getName())) {
+
 				DefaultDomain members = region.getMembers();
-				String newOwner = members.getPlayers().iterator().next();
-				if(newOwner == null) {
-					return ChatColor.RED + "There is no other member in this city. You might want to try /city delete [name]";
+				if (members.getPlayers().isEmpty()) {
+					return ChatColor.RED
+							+ "There is no other member in this city. You might want to try /city delete [name]";
 				}
-					cities.delete(checkPath);
-					DefaultDomain owners = region.getOwners();
-					owners.removePlayer(player.getName());
-				
+				String newOwner = members.getPlayers().iterator().next();
+				cities.delete(checkPath);
+				DefaultDomain owners = region.getOwners();
+				owners.removePlayer(player.getName());
+
 				owners.addPlayer(newOwner);
 				region.setOwners(owners);
 				return "You left the city " + region.getId() + "!";
-			}else {
+			} else {
 				cities.delete(checkPath);
 				DefaultDomain members = region.getMembers();
 				members.removePlayer(player.getName());
 				region.setMembers(members);
 				return "You left the city " + region.getId() + "!";
 			}
-			
+
 		} else {
 			return ChatColor.RED + "You are not in a city!";
 		}
 	}
 
 	public String joinCity(ProtectedRegion region, Player player) {
-		if(region != null) {
-		String checkPath = player.getUniqueId().toString();
-		if (cities.get(checkPath) == null) {
-			if (isInvited(region.getId(), player.getUniqueId().toString())) {
-				DefaultDomain members = region.getMembers();
-				members.addPlayer(player.getName());
-				region.setMembers(members);
-				cities.delete("invites." + checkPath);
-				cities.set(checkPath, region.getId());
-				return "Joined the city "+ region.getId() + "!";
+		if (region != null) {
+			String checkPath = player.getUniqueId().toString();
+			if (cities.get(checkPath) == null) {
+				if (isInvited(region.getId(), player.getUniqueId().toString())) {
+					DefaultDomain members = region.getMembers();
+					members.addPlayer(player.getName());
+					region.setMembers(members);
+					cities.delete("invites." + checkPath);
+					cities.set(checkPath, region.getId());
+					return "Joined the city " + region.getId() + "!";
+				} else {
+					return ChatColor.RED + "You are not invited to join" + region.getId() + "!";
+				}
 			} else {
-				return ChatColor.RED + "You are not invited to join" + region.getId() + "!";
+				return ChatColor.RED + "You are already in a city";
 			}
 		} else {
-			return ChatColor.RED + "You are already in a city";
-		}
-	}else{
-		return ChatColor.RED + "This City does not exist!";
+			return ChatColor.RED + "This City does not exist!";
 		}
 	}
 
