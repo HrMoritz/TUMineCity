@@ -16,74 +16,72 @@ import java.util.logging.Logger;
 
 public class TUMineCity extends JavaPlugin {
 
-    private static Config player;
-    private static Config invitations;
+	private static Config player;
+	private static Config invitations;
 
-    private static Plugin plugin;
-    
-    private static CityCreator cityCreator;
-    
-    private static CommandKit commandKit;
-    
-    private static WorldGuardPlugin worldGuardPlugin;
-    
-    @Override
-    public void onEnable() {
-    	
-        this.plugin = this;
-        worldGuardPlugin = getWorldGuard();
-        player = new Config(this, "player");
-        cityCreator = new CityCreator(player, worldGuardPlugin);
-        getCommand("city").setExecutor(new CommandKit(cityCreator));
-        registerEvents();
+	private static Plugin plugin;
 
+	private static CityCreator cityCreator;
 
-        log("Plugin erfolgreich geladen");
-    }
+	private static CommandKit commandKit;
 
-    /**
-     * logs a String in the console
-     *
-     * @param str logged String
-     */
-    public void log(String str) {
-        Logger.getLogger(str);
-    }
+	private static WorldGuardPlugin worldGuardPlugin;
 
-    private static void registerEvents() {
-        PluginManager pluginManager = Bukkit.getPluginManager();
+	@Override
+	public void onEnable() {
 
-    }
+		this.plugin = this;
+		worldGuardPlugin = getWorldGuard();
+		player = new Config(this, "player");
+		cityCreator = new CityCreator(player, worldGuardPlugin);
+		getCommand("city").setExecutor(new CommandKit(cityCreator));
+		registerEvents();
 
-    public static Config getPlayerConfig() {
-        return player;
-    }
-    
-    public static Config getInvitationsConfig() {
-        return invitations;
-    }
-
-    public static Plugin getPlugin() {
-        return plugin;
-    }
-    
-public static WorldGuardPlugin getWorldGuard() {
-    	Plugin wgp = plugin.getServer().getPluginManager().getPlugin("WorldGuard");
-    	if(wgp == null || wgp instanceof WorldGuardPlugin) {
-    		Bukkit.getServer().broadcastMessage("test");
-    		return null;
-    	}
-    	Bukkit.getServer().broadcastMessage("test2");
-    	return (WorldGuardPlugin) wgp;
-    }
-
-public static WorldEditPlugin getWorldEdit() {
-	Plugin wep = plugin.getServer().getPluginManager().getPlugin("WorldEdit");
-	if(wep == null || wep instanceof WorldGuardPlugin) {
-		return null;
+		log("Plugin erfolgreich geladen");
 	}
-	return (WorldEditPlugin) wep;
-}
 
+	/**
+	 * logs a String in the console
+	 *
+	 * @param str logged String
+	 */
+	public void log(String str) {
+		Logger.getLogger(str);
+	}
+
+	private static void registerEvents() {
+		PluginManager pluginManager = Bukkit.getPluginManager();
+
+	}
+
+	public static Config getPlayerConfig() {
+		return player;
+	}
+
+	public static Config getInvitationsConfig() {
+		return invitations;
+	}
+
+	public static Plugin getPlugin() {
+		return plugin;
+	}
+
+	public static WorldGuardPlugin getWorldGuard() {
+		Plugin wgp = plugin.getServer().getPluginManager().getPlugin("WorldGuard");
+		if (wgp == null || wgp instanceof WorldGuardPlugin) {
+			Bukkit.getServer().broadcastMessage("test");
+			return null;
+		}
+		Bukkit.getServer().broadcastMessage("test2");
+		return (WorldGuardPlugin) wgp;
+	}
+
+	public static WorldEditPlugin getWorldEdit() {
+		Plugin wep = plugin.getServer().getPluginManager().getPlugin("WorldEdit");
+		if (wep == null || wep instanceof WorldGuardPlugin) {
+			return null;
+		}
+		return (WorldEditPlugin) wep;
+	}
 
 }
