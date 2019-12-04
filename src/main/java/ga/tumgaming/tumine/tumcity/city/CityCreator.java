@@ -143,7 +143,7 @@ public class CityCreator {
 				cities.set("invites." + checkPath, invite);
 			}
 			if(isOnline) {
-				Bukkit.getPlayer(uuid).sendMessage("You have been invited to join " + region.getId() + "!");
+				Bukkit.getPlayer(UUID.fromString(uuid)).sendMessage("You have been invited to join " + region.getId() + "!");
 			}
 			return name + " has been invited to the city!";
 		} else {
