@@ -52,7 +52,6 @@ public class CityCreator {
 					DefaultDomain owners = region.getOwners();
 					owners.addPlayer(player.getName());
 					region.setOwners(owners);
-					player.sendMessage(wg.toString());
 					LocalPlayer localplayer = wg.wrapPlayer(player);
 					if(!regions.overlapsUnownedRegion(region, localplayer)){
 					
@@ -68,16 +67,16 @@ public class CityCreator {
 					}
 					return "City has been created!";
 					}else {
-						return "City overlaps with another City";
+						return "&cCity overlaps with another City";
 					}
 				} else {
-					return "A city with this name already exists!";
+					return "&cA city with this name already exists!";
 				}
 			} else {
-				return "ERROR: 2001! Report this to an Admin!";
+				return "&cERROR: 2001! Report this to an Admin!";
 			}
 		} else {
-			return "You are already in a city!";
+			return "&cYou are already in a city!";
 		}
 	}
 
@@ -98,10 +97,10 @@ public class CityCreator {
 				regions.removeRegion(name);
 				return "City has been removed";
 			} else {
-				return "You are not an owner of this city!";
+				return "&cYou are not an owner of this city!";
 			}
 		} else {
-			return "This city does not exist!";
+			return "&cThis city does not exist!";
 		}
 	}
 
@@ -119,7 +118,7 @@ public class CityCreator {
 				}
 			}
 			if (!played) {
-				return "This Player has not played on this server yet!";
+				return "&cThis Player has not played on this server yet!";
 			}
 		} else {
 			uuid = Bukkit.getPlayer(name).getUniqueId().toString();
@@ -133,7 +132,7 @@ public class CityCreator {
 				ArrayList<String> invites = new ArrayList<String>();
 				Collections.addAll(invites, inviteArray);
 				if (invites.contains(region.getId())) {
-					return "Player has already been invited to the City";
+					return "&cPlayer has already been invited to the City";
 				}
 				allInvites = allInvites + "," + region.getId();
 				cities.set("invites." + checkPath, allInvites);
@@ -143,7 +142,7 @@ public class CityCreator {
 			}
 			return "Player has been invited to the city!";
 		} else {
-			return "Player is already in a city";
+			return "&cPlayer is already in a city";
 		}
 	}
 
@@ -160,7 +159,7 @@ public class CityCreator {
 				}
 			}
 			if (!played) {
-				return "This Player has not played on this server yet!";
+				return "&cThis Player has not played on this server yet!";
 			}
 		} else {
 			uuid = Bukkit.getPlayer(name).getUniqueId().toString();
@@ -175,10 +174,10 @@ public class CityCreator {
 				region.setMembers(members);
 				return "Removed member!";
 			} else {
-				return "That player is not a member of this city";
+				return "&cThat player is not a member of this city";
 			}
 		} else {
-			return "That player is not a member of this city";
+			return "&cThat player is not a member of this city";
 		}
 	}
 
@@ -191,7 +190,7 @@ public class CityCreator {
 			region.setMembers(members);
 			return "You left the city!";
 		} else {
-			return "You are not in a city!";
+			return "&cYou are not in a city!";
 		}
 	}
 
@@ -207,13 +206,13 @@ public class CityCreator {
 				cities.set(checkPath, region.getId());
 				return "Joined city!";
 			} else {
-				return "You are not invited to that city!";
+				return "&cYou are not invited to that city!";
 			}
 		} else {
-			return "You are already in a city";
+			return "&cYou are already in a city";
 		}
 	}else{
-		return "This City does not exist!";
+		return "&cThis City does not exist!";
 		}
 	}
 

@@ -81,5 +81,9 @@ public class TUMineCity extends JavaPlugin {
 		}
 		return (WorldEditPlugin) wep;
 	}
+	
+	public static String getPrefix() {
+		return new String("&8[&9TUMine&8]&7 ");
+	}
 
 }

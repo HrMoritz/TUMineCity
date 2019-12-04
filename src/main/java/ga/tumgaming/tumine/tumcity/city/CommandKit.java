@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 
 import com.sk89q.worldedit.math.BlockVector3;
 
+import ga.tumgaming.tumine.tumcity.TUMineCity;
 import ga.tumgaming.tumine.tumcity.util.Config;
 
 public class CommandKit implements CommandExecutor {
@@ -50,68 +51,68 @@ public class CommandKit implements CommandExecutor {
 						zmin = Integer.parseInt(args[4]);
 						zmax = Integer.parseInt(args[5]);
 					} catch (NumberFormatException nfe) {
-						player.sendMessage("Please type in integers!");
+						player.sendMessage(TUMineCity.getPrefix() + "&cPlease type in integers!");
 						return false;
 					}
 
 					BlockVector3 min = BlockVector3.at(Integer.parseInt(args[2]), 0, Integer.parseInt(args[3]));
 					BlockVector3 max = BlockVector3.at(Integer.parseInt(args[4]), 0, Integer.parseInt(args[5]));
-					player.sendMessage(cityCreator.createCity(player, player.getWorld(), name, min, max));
+					player.sendMessage(TUMineCity.getPrefix() + cityCreator.createCity(player, player.getWorld(), name, min, max));
 					return true;
 				} else if (args[0].equalsIgnoreCase("delete") && args.length == 2) {
-					player.sendMessage(cityCreator.removeCity(player, player.getWorld(), args[1]));
+					player.sendMessage(TUMineCity.getPrefix() + cityCreator.removeCity(player, player.getWorld(), args[1]));
 					return true;
 				} else if (args[0].equalsIgnoreCase("add")) {
 					if (cityCreator.getRegionFromPlayer(player.getUniqueId().toString(), player.getWorld()) != null) {
 						if (cityCreator.isOwner(player,
 								cityCreator.getRegionFromPlayer(player.getUniqueId().toString(), player.getWorld()))) {
-							player.sendMessage(cityCreator.addMember(
+							player.sendMessage(TUMineCity.getPrefix() + cityCreator.addMember(
 									cityCreator.getRegionFromPlayer(player.getUniqueId().toString(), player.getWorld()),
 									args[1]));
 						} else {
-							player.sendMessage("You are not the owner of this city!");
+							player.sendMessage(TUMineCity.getPrefix() + "&cYou are not the owner of this city!");
 						}
 						return true;
 					} else {
-						player.sendMessage("You are not in a city!");
+						player.sendMessage(TUMineCity.getPrefix() + "&cYou are not in a city!");
 					}
 				} else if (args[0].equalsIgnoreCase("remove")) {
 					if (cityCreator.getRegionFromPlayer(player.getUniqueId().toString(), player.getWorld()) != null) {
 						if (cityCreator.isOwner(player,
 								cityCreator.getRegionFromPlayer(player.getUniqueId().toString(), player.getWorld()))) {
-							player.sendMessage(cityCreator.removeMember(
+							player.sendMessage(TUMineCity.getPrefix() + cityCreator.removeMember(
 									cityCreator.getRegionFromPlayer(player.getUniqueId().toString(), player.getWorld()),
 									args[1]));
 						} else {
-							player.sendMessage("You are not the owner of this city!");
+							player.sendMessage(TUMineCity.getPrefix() + "&cYou are not the owner of this city!");
 						}
 						return true;
 					} else {
-						player.sendMessage("You are not in a city");
+						player.sendMessage(TUMineCity.getPrefix() + "&cYou are not in a city");
 					}
 				} else if (args[0].equalsIgnoreCase("join")) {
-					player.sendMessage(cityCreator.joinCity(cityCreator.getRegionFromName(args[1], player.getWorld()),
+					player.sendMessage(TUMineCity.getPrefix() + cityCreator.joinCity(cityCreator.getRegionFromName(args[1], player.getWorld()),
 							player));
 					return true;
 				} else if (args[0].equalsIgnoreCase("leave")) {
 					if (cityCreator.getRegionFromPlayer(player.getUniqueId().toString(), player.getWorld()) != null) {
-						player.sendMessage(cityCreator.leaveCity(
+						player.sendMessage(TUMineCity.getPrefix() + cityCreator.leaveCity(
 								cityCreator.getRegionFromPlayer(player.getUniqueId().toString(), player.getWorld()),
 								player));
 						return true;
 					} else {
-						player.sendMessage("You are not in a city");
+						player.sendMessage(TUMineCity.getPrefix() + "&cYou are not in a city");
 					}
 				} else if (args[0].equalsIgnoreCase("invites")) {
 
-					player.sendMessage(cityCreator.getInvites(player));
+					player.sendMessage(TUMineCity.getPrefix() + cityCreator.getInvites(player));
 					return true;
 				} else if (args[0].equalsIgnoreCase("info")) {
 					if (cityCreator.getRegionFromPlayer(player.getUniqueId().toString(), player.getWorld()) != null) {
-					player.sendMessage(cityCreator
+					player.sendMessage(TUMineCity.getPrefix() + cityCreator
 							.getRegionFromPlayer(player.getUniqueId().toString(), player.getWorld()).getId());
 				}else{
-					player.sendMessage("You are not in a city!");}
+					player.sendMessage(TUMineCity.getPrefix() + "&cYou are not in a city!");}
 				}
 			}
 		}
