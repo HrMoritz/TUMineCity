@@ -207,6 +207,8 @@ public class CityCreator {
 
 				owners.addPlayer(newOwner);
 				region.setOwners(owners);
+				members.removePlayer(newOwner);
+				region.setMembers(members);
 				return "You left the city " + region.getId() + "!";
 			} else {
 				cities.delete(checkPath);
