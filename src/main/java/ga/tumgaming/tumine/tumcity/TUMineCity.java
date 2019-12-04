@@ -32,7 +32,6 @@ public class TUMineCity extends JavaPlugin {
     	
         this.plugin = this;
         worldGuardPlugin = getWorldGuard();
-        Bukkit.getServer().broadcastMessage(worldGuardPlugin.toString());
         player = new Config(this, "player");
         cityCreator = new CityCreator(player, worldGuardPlugin);
         getCommand("city").setExecutor(new CommandKit(cityCreator));
@@ -71,8 +70,10 @@ public class TUMineCity extends JavaPlugin {
 public static WorldGuardPlugin getWorldGuard() {
     	Plugin wgp = plugin.getServer().getPluginManager().getPlugin("WorldGuard");
     	if(wgp == null || wgp instanceof WorldGuardPlugin) {
+    		Bukkit.getServer().broadcastMessage("test");
     		return null;
     	}
+    	Bukkit.getServer().broadcastMessage("test2");
     	return (WorldGuardPlugin) wgp;
     }
 
