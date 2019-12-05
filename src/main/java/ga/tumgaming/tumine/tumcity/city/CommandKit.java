@@ -43,28 +43,21 @@ public class CommandKit implements CommandExecutor {
 			if (command.getName().equalsIgnoreCase("city")) {
 				if (args[0].equalsIgnoreCase("create")) {
 					String name; // Remove this and add player to hashmap -> onblockplace event -> add position to hashmap
-					if (args.length != 6) {
+					if (args.length != 2) {
 						return false;
 					}
 					name = args[1];
-					int xmin = 0;
-					int xmax = 0;
-					int zmin = 0;
-					int zmax = 0;
-					try {
-						xmin = Integer.parseInt(args[2]);
-						xmax = Integer.parseInt(args[3]);
-						zmin = Integer.parseInt(args[4]);
-						zmax = Integer.parseInt(args[5]);
-					} catch (NumberFormatException nfe) {
-						player.sendMessage(TUMineCity.getPrefix() + ChatColor.RED + "Please type in integers!");
-						return false;
+					if(plLoc.containsKey(player)) {
+						Location[] locs = plLoc.get(player);
+						if(locs[0] != null && locs[1] != null) {
+							BlockVector3 min = BlockVector3.at(locs[0].getX(), 0, locs[0].getZ());
+							BlockVector3 max = BlockVector3.at(locs[1].getX(), 0, locs[1].getZ());
+							player.sendMessage(TUMineCity.getPrefix() + cityCreator.createCity(player, player.getWorld(), name, min, max));
+							return true;
+						}else {
+							player.sendMessage(TUMineCity.getPrefix() + ChatColor.RED + "Locations have not been marked!");
+						}
 					}
-
-					BlockVector3 min = BlockVector3.at(Integer.parseInt(args[2]), 0, Integer.parseInt(args[3]));
-					BlockVector3 max = BlockVector3.at(Integer.parseInt(args[4]), 0, Integer.parseInt(args[5]));
-					player.sendMessage(TUMineCity.getPrefix() + cityCreator.createCity(player, player.getWorld(), name, min, max));
-					return true;
 				} else if (args[0].equalsIgnoreCase("delete") && args.length == 2) {
 					player.sendMessage(TUMineCity.getPrefix() + cityCreator.removeCity(player, player.getWorld(), args[1]));
 					return true;
