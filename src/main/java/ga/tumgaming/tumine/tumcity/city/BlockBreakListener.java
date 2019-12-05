@@ -31,40 +31,41 @@ public class BlockBreakListener implements Listener {
 		Block block = e.getBlock();
 		Player player = e.getPlayer();
 		boolean found = false;
-		//if (block.getType() == Material.GOLD_BLOCK) {
-			for (Location[] value : plLoc.values()) {
-				for (int i = 0; i < value.length; i++) {
-					String s = Boolean.toString(value[i].equals(block.getLocation()));
+		// if (block.getType() == Material.GOLD_BLOCK) {
+		for (Location[] value : plLoc.values()) {
+			for (int i = 0; i < value.length; i++) {
+				if (value[i] != null) {
 					if (value[i].equals(block.getLocation())) {
 						player.sendMessage("Found");
 						found = true;
 						break;
 					}
 				}
-				if (found) {
-					break;
-				}
 			}
 			if (found) {
-				if (plLoc.containsKey(player)) {
-					Location[] locs = plLoc.get(player);
-					if (locs[0] != null && locs[0].equals(block.getLocation())) {
-						locs[0] = null;
-						player.sendMessage("Destroyed City building Block 1");
-						plLoc.replace(player, locs);
-					} else if (locs[1] != null && locs[1].equals(block.getLocation())) {
-						locs[1] = null;
-						player.sendMessage("Destroyed City building Block 2");
-						plLoc.replace(player, locs);
-					} else {
-						player.sendMessage("This is not your City building Block");
-						e.setCancelled(true);
-					}
+				break;
+			}
+		}
+		if (found) {
+			if (plLoc.containsKey(player)) {
+				Location[] locs = plLoc.get(player);
+				if (locs[0] != null && locs[0].equals(block.getLocation())) {
+					locs[0] = null;
+					player.sendMessage("Destroyed City building Block 1");
+					plLoc.replace(player, locs);
+				} else if (locs[1] != null && locs[1].equals(block.getLocation())) {
+					locs[1] = null;
+					player.sendMessage("Destroyed City building Block 2");
+					plLoc.replace(player, locs);
 				} else {
 					player.sendMessage("This is not your City building Block");
 					e.setCancelled(true);
 				}
+			} else {
+				player.sendMessage("This is not your City building Block");
+				e.setCancelled(true);
 			}
 		}
-	//}
+	}
+	// }
 }
