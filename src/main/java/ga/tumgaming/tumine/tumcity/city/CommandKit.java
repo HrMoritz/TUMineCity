@@ -57,6 +57,8 @@ public class CommandKit implements CommandExecutor {
 						}else {
 							player.sendMessage(TUMineCity.getPrefix() + ChatColor.RED + "Locations have not been marked!");
 						}
+					}else {
+						player.sendMessage(TUMineCity.getPrefix() + ChatColor.RED + "Locations have not been marked!");
 					}
 				} else if (args[0].equalsIgnoreCase("delete") && args.length == 2) {
 					player.sendMessage(TUMineCity.getPrefix() + cityCreator.removeCity(player, player.getWorld(), args[1]));
