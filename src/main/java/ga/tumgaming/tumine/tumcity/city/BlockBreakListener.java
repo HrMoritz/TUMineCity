@@ -31,21 +31,23 @@ public class BlockBreakListener implements Listener {
 		Block block = e.getBlock();
 		Player player = e.getPlayer();
 		player.sendMessage("Test0");
-		
+
 		boolean found = false;
 		if (block.getType() == Material.GOLD_BLOCK) {
 			for (Location[] value : plLoc.values()) {
-			    for(int i = 0; i < value.length; i++) {
-			    	if(value[i] == block.getLocation()) {
-			    		found = true;
-			    		break;
-			    	}
-			    	if(found) {
-			    		break;
-			    	}
-			    }
+				player.sendMessage(value.toString());
+				for (int i = 0; i < value.length; i++) {
+					if (value[i] == block.getLocation()) {
+						found = true;
+						break;
+					}
+				}
+				if (found) {
+					break;
+				}
+
 			}
-			
+
 			if (found) {
 				player.sendMessage("Test1");
 				if (plLoc.containsKey(player)) {
