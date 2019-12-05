@@ -31,7 +31,7 @@ public class BlockPlaceListener implements Listener {
 		Block block = e.getBlock();
 		Player player = e.getPlayer();
 		player.sendMessage("test1");
-		if (e.getItemInHand().getItemMeta().getLore().get(0) == "City building Block") {
+		if (e.getItemInHand().getItemMeta().getLore().get(0).equals("City building Block")) {
 			player.sendMessage("test2");
 			if (plLoc.containsKey(player)) {
 				player.sendMessage("test3");
