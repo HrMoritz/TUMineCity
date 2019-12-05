@@ -1,5 +1,6 @@
 package ga.tumgaming.tumine.tumcity;
 
+import ga.tumgaming.tumine.tumcity.city.BlockBreakListener;
 import ga.tumgaming.tumine.tumcity.city.BlockPlaceListener;
 import ga.tumgaming.tumine.tumcity.city.CityCreator;
 import ga.tumgaming.tumine.tumcity.city.CommandKit;
@@ -34,8 +35,6 @@ public class TUMineCity extends JavaPlugin {
 
 	private static WorldGuardPlugin worldGuardPlugin;
 	
-	private static BlockPlaceListener blockPlaceListener;
-	
 	private static HashMap<Player, Location[]> plLoc = new HashMap<>();
 
 	@Override
@@ -63,6 +62,7 @@ public class TUMineCity extends JavaPlugin {
 	private static void registerEvents() {
 		PluginManager pluginManager = Bukkit.getPluginManager();
 		pluginManager.registerEvents(new BlockPlaceListener(instance, plLoc, cityCreator), plugin);
+		pluginManager.registerEvents(new BlockBreakListener(instance, plLoc, cityCreator), plugin);
 
 	}
 
