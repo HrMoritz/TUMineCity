@@ -35,7 +35,8 @@ public class BlockBreakListener implements Listener {
 		boolean found = false;
 		if (block.getType() == Material.GOLD_BLOCK) {
 			for (Location[] value : plLoc.values()) {
-				player.sendMessage(value.toString());
+				player.sendMessage(value[0].toString());
+				player.sendMessage(value[1].toString());
 				for (int i = 0; i < value.length; i++) {
 					if (value[i] == block.getLocation()) {
 						found = true;
