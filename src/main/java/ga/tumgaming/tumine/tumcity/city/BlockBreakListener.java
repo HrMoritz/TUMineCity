@@ -38,6 +38,12 @@ public class BlockBreakListener implements Listener {
 				for (int i = 0; i < value.length; i++) {
 					player.sendMessage("Checking");
 					String s = Boolean.toString(value[i] == block.getLocation());
+					player.sendMessage(block.getLocation().toString());
+					if(value[i] == null) {
+						player.sendMessage("null");
+					}else {
+						value[i].toString();
+					}
 					player.sendMessage(s);
 					if (value[i] == block.getLocation()) {
 						player.sendMessage("Found");
