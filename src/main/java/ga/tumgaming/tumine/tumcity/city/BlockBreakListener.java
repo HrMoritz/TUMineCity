@@ -37,8 +37,10 @@ public class BlockBreakListener implements Listener {
 			for (Location[] value : plLoc.values()) {
 				player.sendMessage(value[0].toString());
 				player.sendMessage(value[1].toString());
+				player.sendMessage(block.getLocation().toString());
 				for (int i = 0; i < value.length; i++) {
 					if (value[i] == block.getLocation()) {
+						player.sendMessage("Found");
 						found = true;
 						break;
 					}
