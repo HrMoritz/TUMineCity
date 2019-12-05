@@ -30,6 +30,7 @@ public class BlockPlaceListener implements Listener {
 
 		Block block = e.getBlock();
 		Player player = e.getPlayer();
+		player.sendMessage(e.getItemInHand().getItemMeta().getLore().get(0));
 		if (e.getItemInHand().getItemMeta().getLore().get(0) == "City building Block") {
 			if (plLoc.containsKey(player)) {
 				Location[] locs = plLoc.get(player);
