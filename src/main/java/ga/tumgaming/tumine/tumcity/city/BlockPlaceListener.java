@@ -61,9 +61,10 @@ public class BlockPlaceListener implements Listener {
 					plLoc.put(player, locs);
 					player.sendMessage("First block set at: X: " + block.getX() + " Z: " + block.getZ());
 				}
+			} else {
+				player.sendMessage("You are already in a city");
+				e.setCancelled(true);
 			}
-		}else {
-			player.sendMessage("You are already in a city");
 		}
 	}
 
@@ -82,6 +83,7 @@ public class BlockPlaceListener implements Listener {
 					locs[1] = null;
 					plLoc.replace(player, locs);
 				} else {
+					player.sendMessage("This is not your City building Block");
 					e.setCancelled(true);
 				}
 			} else {
