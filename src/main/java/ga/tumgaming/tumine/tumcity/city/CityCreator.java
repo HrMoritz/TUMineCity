@@ -2,12 +2,14 @@ package ga.tumgaming.tumine.tumcity.city;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
@@ -33,10 +35,12 @@ public class CityCreator {
 	private WorldEditPlugin we;
 	private WorldGuardPlugin wg;
 	private Config cities;
+	private HashMap<Player, Location[]> plLoc;
 
-	public CityCreator(Config cit, WorldGuardPlugin _wg) {
+	public CityCreator(Config cit, WorldGuardPlugin _wg, HashMap<Player, Location[]> hm) {
 		this.cities = cit;
 		this.wg = _wg;
+		plLoc = hm;
 	}
 
 	public String createCity(Player player, World world, String name, BlockVector3 _min, BlockVector3 _max) {

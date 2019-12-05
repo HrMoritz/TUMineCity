@@ -1,11 +1,14 @@
 package ga.tumgaming.tumine.tumcity;
 
+import ga.tumgaming.tumine.tumcity.city.BlockPlaceListener;
 import ga.tumgaming.tumine.tumcity.city.CityCreator;
 import ga.tumgaming.tumine.tumcity.city.CommandKit;
 import ga.tumgaming.tumine.tumcity.util.Config;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -13,6 +16,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 
+import java.util.HashMap;
 import java.util.logging.Logger;
 
 public class TUMineCity extends JavaPlugin {
@@ -27,6 +31,10 @@ public class TUMineCity extends JavaPlugin {
 	private static CommandKit commandKit;
 
 	private static WorldGuardPlugin worldGuardPlugin;
+	
+	private static BlockPlaceListener blockPlaceListener;
+	
+	private static HashMap<Player, Location[]> plLoc = new HashMap<>();
 
 	@Override
 	public void onEnable() {
@@ -34,8 +42,9 @@ public class TUMineCity extends JavaPlugin {
 		this.plugin = this;
 		worldGuardPlugin = getWorldGuard();
 		player = new Config(this, "player");
-		cityCreator = new CityCreator(player, worldGuardPlugin);
-		getCommand("city").setExecutor(new CommandKit(cityCreator));
+		cityCreator = new CityCreator(player, worldGuardPlugin, plLoc);
+		getCommand("city").setExecutor(new CommandKit(cityCreator, plLoc));
+		blockPlaceListener = new BlockPlaceListener(this, plLoc);
 		registerEvents();
 
 		log("Plugin erfolgreich geladen");

@@ -1,6 +1,9 @@
 package ga.tumgaming.tumine.tumcity.city;
 
+import java.util.HashMap;
+
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -14,9 +17,11 @@ import ga.tumgaming.tumine.tumcity.util.Config;
 public class CommandKit implements CommandExecutor {
 
 	private static CityCreator cityCreator;
-
-	public CommandKit(CityCreator cit) {
+	private HashMap<Player, Location[]> plLoc;
+	
+	public CommandKit(CityCreator cit, HashMap<Player, Location[]> hm) {
 		cityCreator = cit;
+		plLoc = hm;
 	}
 
 	public static boolean isNumeric(String strNum) {
@@ -37,7 +42,7 @@ public class CommandKit implements CommandExecutor {
 			Player player = (Player) sender;
 			if (command.getName().equalsIgnoreCase("city")) {
 				if (args[0].equalsIgnoreCase("create")) {
-					String name;
+					String name; // Remove this and add player to hashmap -> onblockplace event -> add position to hashmap
 					if (args.length != 6) {
 						return false;
 					}
