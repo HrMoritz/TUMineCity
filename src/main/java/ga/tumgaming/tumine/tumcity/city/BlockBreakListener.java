@@ -36,16 +36,8 @@ public class BlockBreakListener implements Listener {
 		//if (block.getType() == Material.GOLD_BLOCK) {
 			for (Location[] value : plLoc.values()) {
 				for (int i = 0; i < value.length; i++) {
-					player.sendMessage("Checking");
-					String s = Boolean.toString(value[i] == block.getLocation());
-					player.sendMessage(block.getLocation().toString());
-					if(value[i] == null) {
-						player.sendMessage("null");
-					}else {
-						player.sendMessage(value[i].toString());
-					}
-					player.sendMessage(s);
-					if (value[i] == block.getLocation()) {
+					String s = Boolean.toString(value[i].equals(block.getLocation()));
+					if (value[i].equals(block.getLocation())) {
 						player.sendMessage("Found");
 						found = true;
 						break;
@@ -54,30 +46,22 @@ public class BlockBreakListener implements Listener {
 				if (found) {
 					break;
 				}
-
 			}
-
 			if (found) {
-				player.sendMessage("Test1");
 				if (plLoc.containsKey(player)) {
-					player.sendMessage("Test2");
 					Location[] locs = plLoc.get(player);
-					if (locs[0] != null && locs[0] == block.getLocation()) {
+					if (locs[0] != null && locs[0].equals(block.getLocation())) {
 						locs[0] = null;
 						plLoc.replace(player, locs);
-						player.sendMessage("Test3");
-					} else if (locs[1] != null && locs[1] == block.getLocation()) {
+					} else if (locs[1] != null && locs[1].equals(block.getLocation())) {
 						locs[1] = null;
 						plLoc.replace(player, locs);
-						player.sendMessage("Test4");
 					} else {
 						player.sendMessage("This is not your City building Block");
-						player.sendMessage("Test5");
 						e.setCancelled(true);
 					}
 				} else {
 					player.sendMessage("This is not your City building Block");
-					player.sendMessage("Test6");
 					e.setCancelled(true);
 				}
 			}
