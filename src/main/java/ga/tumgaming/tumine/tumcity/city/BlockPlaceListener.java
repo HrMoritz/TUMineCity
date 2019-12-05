@@ -68,20 +68,22 @@ public class BlockPlaceListener implements Listener {
 		Block block = e.getBlock();
 		Player player = e.getPlayer();
 
-		if (plLoc.containsKey(player)) {
-			Location[] locs = plLoc.get(player);
-			if (locs[0] != null && locs[0] == block.getLocation()) {
-				locs[0] = null;
-				plLoc.replace(player, locs);
-			} else if (locs[1] != null && locs[1] == block.getLocation()) {
-				locs[1] = null;
-				plLoc.replace(player, locs);
+		if (plLoc.containsValue(block.getLocation())) {
+			if (plLoc.containsKey(player)) {
+				Location[] locs = plLoc.get(player);
+				if (locs[0] != null && locs[0] == block.getLocation()) {
+					locs[0] = null;
+					plLoc.replace(player, locs);
+				} else if (locs[1] != null && locs[1] == block.getLocation()) {
+					locs[1] = null;
+					plLoc.replace(player, locs);
+				} else {
+					e.setCancelled(true);
+				}
 			} else {
+				player.sendMessage("This is not your City building Block");
 				e.setCancelled(true);
 			}
-		} else {
-			player.sendMessage("This is not your City building Block");
-			e.setCancelled(true);
 		}
 	}
 }
