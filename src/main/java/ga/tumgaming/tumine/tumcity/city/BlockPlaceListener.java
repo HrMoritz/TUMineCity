@@ -30,9 +30,11 @@ public class BlockPlaceListener implements Listener {
 
 		Block block = e.getBlock();
 		Player player = e.getPlayer();
-		player.sendMessage(e.getItemInHand().getItemMeta().getLore().get(0));
+		player.sendMessage("test1");
 		if (e.getItemInHand().getItemMeta().getLore().get(0) == "City building Block") {
+			player.sendMessage("test2");
 			if (plLoc.containsKey(player)) {
+				player.sendMessage("test3");
 				Location[] locs = plLoc.get(player);
 				if (locs[0] == null) {
 					locs[0] = block.getLocation();
@@ -54,13 +56,13 @@ public class BlockPlaceListener implements Listener {
 				}
 
 			} else {
+				player.sendMessage("test4");
 				Location[] locs = new Location[2];
 				locs[0] = block.getLocation();
 				plLoc.put(player, locs);
 				player.sendMessage("First block set at: X: " + block.getX() + " Z: " + block.getZ());
 			}
-		} else {
-		}
+		} 
 	}
 
 	@EventHandler
