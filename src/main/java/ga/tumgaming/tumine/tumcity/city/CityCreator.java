@@ -64,6 +64,7 @@ public class CityCreator {
 						String path = player.getUniqueId().toString();
 						cities.set(path, name);
 						regions.addRegion(region);
+						plLoc.remove(player);
 
 						// check if city overlaps with other region
 						try {
