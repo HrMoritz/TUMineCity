@@ -42,7 +42,7 @@ public class BlockBreakListener implements Listener {
 					if(value[i] == null) {
 						player.sendMessage("null");
 					}else {
-						value[i].toString();
+						player.sendMessage(value[i].toString());
 					}
 					player.sendMessage(s);
 					if (value[i] == block.getLocation()) {
