@@ -30,15 +30,12 @@ public class BlockBreakListener implements Listener {
 	private void onBlockBreak(BlockBreakEvent e) {
 		Block block = e.getBlock();
 		Player player = e.getPlayer();
-		player.sendMessage("Test0");
-
 		boolean found = false;
 		//if (block.getType() == Material.GOLD_BLOCK) {
 			for (Location[] value : plLoc.values()) {
 				for (int i = 0; i < value.length; i++) {
 					String s = Boolean.toString(value[i].equals(block.getLocation()));
 					if (value[i].equals(block.getLocation())) {
-						player.sendMessage("Found");
 						found = true;
 						break;
 					}
@@ -52,9 +49,11 @@ public class BlockBreakListener implements Listener {
 					Location[] locs = plLoc.get(player);
 					if (locs[0] != null && locs[0].equals(block.getLocation())) {
 						locs[0] = null;
+						player.sendMessage("Destroyed City building Block 1");
 						plLoc.replace(player, locs);
 					} else if (locs[1] != null && locs[1].equals(block.getLocation())) {
 						locs[1] = null;
+						player.sendMessage("Destroyed City building Block 2");
 						plLoc.replace(player, locs);
 					} else {
 						player.sendMessage("This is not your City building Block");
