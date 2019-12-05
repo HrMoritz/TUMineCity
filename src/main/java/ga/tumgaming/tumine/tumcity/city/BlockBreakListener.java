@@ -33,7 +33,7 @@ public class BlockBreakListener implements Listener {
 		player.sendMessage("Test0");
 
 		boolean found = false;
-		if (block.getType() == Material.GOLD_BLOCK) {
+		//if (block.getType() == Material.GOLD_BLOCK) {
 			for (Location[] value : plLoc.values()) {
 				player.sendMessage(value[0].toString());
 				player.sendMessage(value[1].toString());
@@ -79,5 +79,5 @@ public class BlockBreakListener implements Listener {
 				}
 			}
 		}
-	}
+	//}
 }
