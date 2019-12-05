@@ -46,7 +46,6 @@ public class TUMineCity extends JavaPlugin {
 		player = new Config(this, "player");
 		cityCreator = new CityCreator(player, worldGuardPlugin, plLoc);
 		getCommand("city").setExecutor(new CommandKit(cityCreator, plLoc));
-		blockPlaceListener = new BlockPlaceListener(this, plLoc);
 		registerEvents();
 
 		log("Plugin erfolgreich geladen");
@@ -63,7 +62,7 @@ public class TUMineCity extends JavaPlugin {
 
 	private static void registerEvents() {
 		PluginManager pluginManager = Bukkit.getPluginManager();
-		pluginManager.registerEvents(new BlockPlaceListener(instance, plLoc), plugin);
+		pluginManager.registerEvents(new BlockPlaceListener(instance, plLoc, cityCreator), plugin);
 
 	}
 
