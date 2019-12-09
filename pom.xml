@@ -6,7 +6,7 @@
 
 	<groupId>ga.tumgaming.tumine.tumcity</groupId>
 	<artifactId>TUMineCity</artifactId>
-	<version>0.1-SNAPSHOT</version>
+	<version>0.1.1</version>
 
 	<repositories>
 		<repository>
@@ -35,6 +35,14 @@
 			<groupId>org.spigotmc</groupId>
 			<artifactId>spigot-api</artifactId>
 			<version>1.14-R0.1-SNAPSHOT</version>
+		</dependency>
+		
+		<dependency>
+			<artifactId>org.spigotmc</artifactId>
+			<version>1.14.4-R0.1-SNAPSHOT</version>
+			<groupId>org.bukkit</groupId>
+			<scope>system</scope>
+			<systemPath>${basedir}/lib/spigot-1.14.4.jar</systemPath>
 		</dependency>
 
 		<dependency>
