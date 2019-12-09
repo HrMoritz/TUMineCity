@@ -3,6 +3,7 @@ package ga.tumgaming.tumine.tumcity.city;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -43,20 +44,20 @@ public class BlockPlaceListener implements Listener {
 							Location[] locs = plLoc.get(player);
 							if (locs[0] == null) {
 								locs[0] = block.getLocation();
-								player.sendMessage("First block set at: X: " + block.getX() + " Z: " + block.getZ());
+								player.sendMessage(TUMineCity.getPrefix() + "First block set at: X: " + block.getX() + " Z: " + block.getZ());
 								plLoc.replace(player, locs);
 								if (locs[0] != null && locs[1] != null) {
 									// city can be created
 								}
 							} else if (locs[1] == null) {
 								locs[1] = block.getLocation();
-								player.sendMessage("Second block set at: X: " + block.getX() + " Z: " + block.getZ());
+								player.sendMessage(TUMineCity.getPrefix() + "Second block set at: X: " + block.getX() + " Z: " + block.getZ());
 								plLoc.replace(player, locs);
 								if (locs[0] != null && locs[1] != null) {
 									// city can be created
 								}
 							} else if (locs[0] != null && locs[1] != null) {
-								player.sendMessage("You already placed enough Blocks");
+								player.sendMessage(TUMineCity.getPrefix() + ChatColor.RED + "You already placed enough Blocks");
 								e.setCancelled(true);
 							}
 
@@ -64,10 +65,10 @@ public class BlockPlaceListener implements Listener {
 							Location[] locs = new Location[2];
 							locs[0] = block.getLocation();
 							plLoc.put(player, locs);
-							player.sendMessage("First block set at: X: " + block.getX() + " Z: " + block.getZ());
+							player.sendMessage(TUMineCity.getPrefix() + "First block set at: X: " + block.getX() + " Z: " + block.getZ());
 						}
 					} else {
-						player.sendMessage("You are already in a city");
+						player.sendMessage(TUMineCity.getPrefix() + ChatColor.RED + "You are already in a city");
 						e.setCancelled(true);
 					}
 				}
