@@ -1,6 +1,7 @@
 package ga.tumgaming.tumine.tumcity.city;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -95,16 +96,43 @@ public class CityCreator {
 			if (regions.getRegion(name).getOwners().contains(player.getName())) {
 				Set<String> key = cities.getCities();
 				for (String s : key) {
+					String[] arr = s.split(",");
 					if (isUUID(s)) {
 						String val = (String) cities.get(s);
 						if (val.equalsIgnoreCase(name)) {
 							cities.delete(s);
 						}
+					} else if (arr.length == 2 && arr[0].equals("invites")) {
+						String allInvites = cities.get(s);
+						player.sendMessage(s);
+						String[] invites = allInvites.split(",");
+						String[] newInvites = new String[invites.length-1];
+						int index = 0;
+						for(int i = 0; i < invites.length; i++ ) {
+							if(invites[i].equalsIgnoreCase(name)) {
+								
+							}else {
+								newInvites[index] = invites[i];
+								index++;
+							}
+						}
+						player.sendMessage(invites.toString());
+						if (newInvites.length > 0) {
+							String newAllInvites = newInvites[0];
+							if (newInvites.length > 1) {
+								for (int i = 0; i < newInvites.length; i++) {
+									newAllInvites = newAllInvites + "," + newInvites[i];
+								}
+							}
+						}else {
+							cities.delete(s);
+						}
+
 					}
 				}
 				/*
 				 * 
-				 * 	NEED TO REMOVE INVITES OF CITY THAT IS GOING TO BE DESTROYED
+				 * NEED TO REMOVE INVITES OF CITY THAT IS GOING TO BE DESTROYED
 				 * 
 				 * 
 				 */
@@ -141,8 +169,8 @@ public class CityCreator {
 
 		String checkPath = uuid;
 		if (cities.get(checkPath) == null) {
-			if (cities.get("invites." + checkPath) != null) {
-				String allInvites = cities.get("invites." + checkPath);
+			if (cities.get("invites," + checkPath) != null) {
+				String allInvites = cities.get("invites," + checkPath);
 				String[] inviteArray = allInvites.split(",");
 				ArrayList<String> invites = new ArrayList<String>();
 				Collections.addAll(invites, inviteArray);
@@ -150,10 +178,10 @@ public class CityCreator {
 					return ChatColor.RED + name + " has already been invited to this City";
 				}
 				allInvites = allInvites + "," + region.getId();
-				cities.set("invites." + checkPath, allInvites);
+				cities.set("invites," + checkPath, allInvites);
 			} else {
 				String invite = region.getId();
-				cities.set("invites." + checkPath, invite);
+				cities.set("invites," + checkPath, invite);
 			}
 			if (isOnline) {
 				Bukkit.getPlayer(UUID.fromString(uuid))
@@ -241,7 +269,7 @@ public class CityCreator {
 					DefaultDomain members = region.getMembers();
 					members.addPlayer(player.getName());
 					region.setMembers(members);
-					cities.delete("invites." + checkPath);
+					cities.delete("invites," + checkPath);
 					cities.set(checkPath, region.getId());
 					return "Joined the city " + region.getId() + "!";
 				} else {
@@ -286,14 +314,14 @@ public class CityCreator {
 
 	public String getInvites(Player player) {
 		String checkPath = player.getUniqueId().toString();
-		String invites = cities.get("invites." + checkPath);
+		String invites = cities.get("invites," + checkPath);
 
 		return invites;
 	}
 
 	public boolean isInvited(String region, String uuid) {
 		String checkPath = uuid;
-		String allInvites = cities.get("invites." + checkPath);
+		String allInvites = cities.get("invites," + checkPath);
 		String[] inviteArray = allInvites.split(",");
 		ArrayList<String> invites = new ArrayList<String>();
 		Collections.addAll(invites, inviteArray);
@@ -302,13 +330,13 @@ public class CityCreator {
 		}
 		return false;
 	}
-	
+
 	public boolean isUUID(String string) {
-	    try {
-	        UUID.fromString(string);
-	        return true;
-	    } catch (Exception ex) {
-	        return false;
-	    }
+		try {
+			UUID.fromString(string);
+			return true;
+		} catch (Exception ex) {
+			return false;
+		}
 	}
 }

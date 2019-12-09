@@ -52,9 +52,11 @@ public class BlockBreakListener implements Listener {
 				if (locs[0] != null && locs[0].equals(block.getLocation())) {
 					locs[0] = null;
 					player.sendMessage("Destroyed City building Block 1");
+					// Give back item with lore
 					plLoc.replace(player, locs);
 				} else if (locs[1] != null && locs[1].equals(block.getLocation())) {
 					locs[1] = null;
+					// Give back item with lore
 					player.sendMessage("Destroyed City building Block 2");
 					plLoc.replace(player, locs);
 				} else {
