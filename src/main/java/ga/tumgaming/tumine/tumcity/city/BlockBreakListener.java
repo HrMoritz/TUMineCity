@@ -61,6 +61,7 @@ public class BlockBreakListener implements Listener {
 	                ItemStack item = new ItemStack(Material.GOLD_BLOCK);
 	                ItemMeta itemMeta = item.getItemMeta();
 	                ArrayList<String> lore = new ArrayList<String>();
+	                lore.add("City building Block");
 	                itemMeta.setLore(lore);
 	                item.setItemMeta(itemMeta);
 					inventory.addItem(item);
@@ -73,6 +74,7 @@ public class BlockBreakListener implements Listener {
 	                ItemStack item = new ItemStack(Material.GOLD_BLOCK);
 	                ItemMeta itemMeta = item.getItemMeta();
 	                ArrayList<String> lore = new ArrayList<String>();
+	                lore.add("City building Block");
 	                itemMeta.setLore(lore);
 	                item.setItemMeta(itemMeta);
 					inventory.addItem(item);
