@@ -65,7 +65,7 @@ public class BlockBreakListener implements Listener {
 	                itemMeta.setLore(lore);
 	                item.setItemMeta(itemMeta);
 					inventory.addItem(item);
-					
+					e.setDropItems(false);
 					plLoc.replace(player, locs);
 				} else if (locs[1] != null && locs[1].equals(block.getLocation())) {
 					locs[1] = null;
