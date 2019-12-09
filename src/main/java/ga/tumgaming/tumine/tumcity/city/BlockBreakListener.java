@@ -63,12 +63,19 @@ public class BlockBreakListener implements Listener {
 	                ArrayList<String> lore = new ArrayList<String>();
 	                itemMeta.setLore(lore);
 	                item.setItemMeta(itemMeta);
-					inventory.addItem(new ItemStack(Material.GOLD_BLOCK));
+					inventory.addItem(item);
 					
 					plLoc.replace(player, locs);
 				} else if (locs[1] != null && locs[1].equals(block.getLocation())) {
 					locs[1] = null;
 					// Give back item with lore
+					PlayerInventory inventory = player.getInventory();
+	                ItemStack item = new ItemStack(Material.GOLD_BLOCK);
+	                ItemMeta itemMeta = item.getItemMeta();
+	                ArrayList<String> lore = new ArrayList<String>();
+	                itemMeta.setLore(lore);
+	                item.setItemMeta(itemMeta);
+					inventory.addItem(item);
 					player.sendMessage(TUMineCity.getPrefix() + "Destroyed City building Block 2");
 					plLoc.replace(player, locs);
 				} else {
