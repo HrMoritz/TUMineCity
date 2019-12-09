@@ -78,6 +78,7 @@ public class BlockBreakListener implements Listener {
 	                itemMeta.setLore(lore);
 	                item.setItemMeta(itemMeta);
 					inventory.addItem(item);
+					e.setDropItems(false);
 					player.sendMessage(TUMineCity.getPrefix() + "Destroyed City building Block 2");
 					plLoc.replace(player, locs);
 				} else {
