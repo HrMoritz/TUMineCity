@@ -13,6 +13,11 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
 
+import com.sk89q.worldedit.math.BlockVector3;
+import com.sk89q.worldedit.world.World;
+import com.sk89q.worldguard.WorldGuard;
+import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
+
 import ga.tumgaming.tumine.tumcity.TUMineCity;
 
 public class BlockPlaceListener implements Listener {
@@ -20,6 +25,7 @@ public class BlockPlaceListener implements Listener {
 	private HashMap<Player, Location[]> plLoc;
 	private TUMineCity plugin;
 	private CityCreator cityCreator;
+	private WorldGuardPlugin wg;
 
 	public BlockPlaceListener(TUMineCity pl, HashMap<Player, Location[]> hm, CityCreator cc) {
 		plugin = pl;
@@ -29,43 +35,55 @@ public class BlockPlaceListener implements Listener {
 
 	private ArrayList<String> edit = new ArrayList<String>();
 
-	@EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = false)
+	@EventHandler
 	private void onBlockPlace(BlockPlaceEvent e) {
 
 		Block block = e.getBlock();
 		Player player = e.getPlayer();
+		BlockVector3 block3 = BlockVector3.at(block.getLocation().getX(), block.getLocation().getY(),
+				block.getLocation().getZ());
 		if (block.getType().equals(Material.GOLD_BLOCK)) {
 			if (e.getItemInHand() != null && e.getItemInHand().getItemMeta() != null
 					&& e.getItemInHand().getItemMeta().getLore() != null
 					&& e.getItemInHand().getItemMeta().getLore().get(0) != null) {
 				if (e.getItemInHand().getItemMeta().getLore().get(0).equals("City building Block")) {
 					if (cityCreator.getRegionFromPlayer(player.getUniqueId().toString(), player.getWorld()) == null) {
-						if (plLoc.containsKey(player)) {
-							Location[] locs = plLoc.get(player);
-							if (locs[0] == null) {
-								locs[0] = block.getLocation();
-								player.sendMessage(TUMineCity.getPrefix() + "First block set at: X: " + block.getX() + " Z: " + block.getZ());
-								plLoc.replace(player, locs);
-								if (locs[0] != null && locs[1] != null) {
-									// city can be created
+						if (WorldGuard.getInstance().getPlatform().getRegionContainer().get((World) player.getWorld())
+								.getApplicableRegions(block3) != null) {
+							if (plLoc.containsKey(player)) {
+								Location[] locs = plLoc.get(player);
+								if (locs[0] == null) {
+									locs[0] = block.getLocation();
+									player.sendMessage(TUMineCity.getPrefix() + "First block set at: X: " + block.getX()
+											+ " Z: " + block.getZ());
+									plLoc.replace(player, locs);
+									if (locs[0] != null && locs[1] != null) {
+										// city can be created
+									}
+								} else if (locs[1] == null) {
+									locs[1] = block.getLocation();
+									player.sendMessage(TUMineCity.getPrefix() + "Second block set at: X: "
+											+ block.getX() + " Z: " + block.getZ());
+									plLoc.replace(player, locs);
+									if (locs[0] != null && locs[1] != null) {
+										// city can be created
+									}
+								} else if (locs[0] != null && locs[1] != null) {
+									player.sendMessage(TUMineCity.getPrefix() + ChatColor.RED
+											+ "You already placed enough Blocks");
+									e.setCancelled(true);
 								}
-							} else if (locs[1] == null) {
-								locs[1] = block.getLocation();
-								player.sendMessage(TUMineCity.getPrefix() + "Second block set at: X: " + block.getX() + " Z: " + block.getZ());
-								plLoc.replace(player, locs);
-								if (locs[0] != null && locs[1] != null) {
-									// city can be created
-								}
-							} else if (locs[0] != null && locs[1] != null) {
-								player.sendMessage(TUMineCity.getPrefix() + ChatColor.RED + "You already placed enough Blocks");
-								e.setCancelled(true);
-							}
 
-						} else {
-							Location[] locs = new Location[2];
-							locs[0] = block.getLocation();
-							plLoc.put(player, locs);
-							player.sendMessage(TUMineCity.getPrefix() + "First block set at: X: " + block.getX() + " Z: " + block.getZ());
+							} else {
+								Location[] locs = new Location[2];
+								locs[0] = block.getLocation();
+								plLoc.put(player, locs);
+								player.sendMessage(TUMineCity.getPrefix() + "First block set at: X: " + block.getX()
+										+ " Z: " + block.getZ());
+							}
+						}else {
+							//player.sendMessage(TUMineCity.getPrefix() + ChatColor.RED + "You are already in a city");
+							e.setCancelled(true);
 						}
 					} else {
 						player.sendMessage(TUMineCity.getPrefix() + ChatColor.RED + "You are already in a city");
