@@ -123,6 +123,7 @@ public class CityCreator {
 								}
 							}
 							player.sendMessage(s + " GIMME GIMME GIMME " + newAllInvites);
+							cities.delete(s);
 							cities.set(s, newAllInvites);
 						}
 					}
