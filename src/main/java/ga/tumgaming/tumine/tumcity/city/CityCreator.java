@@ -116,18 +116,15 @@ public class CityCreator {
 							}
 						}
 						if (newInvites.length > 0) {
-							player.sendMessage("more than 2 invites");
 							String newAllInvites = newInvites[0]; 
 							if (newInvites.length > 1) {
 								for (int i = 0; i < newInvites.length; i++) {
 									newAllInvites = newAllInvites + "," + newInvites[i];
 								}
-								player.sendMessage("should have deleted " + newAllInvites);
-								cities.delete(s);
 								cities.set(s, newAllInvites);
 							}
 						}else {
-							cities.delete(s);
+							cities.set(s, newInvites[0]);
 						}
 					}
 				}
