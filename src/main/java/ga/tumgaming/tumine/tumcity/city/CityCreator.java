@@ -122,6 +122,7 @@ public class CityCreator {
 									newAllInvites = newAllInvites + "," + newInvites[i];
 								}
 							}
+							player.sendMessage(s + " GIMME GIMME GIMME " + newAllInvites);
 							cities.set(s, newAllInvites);
 						}
 					}
