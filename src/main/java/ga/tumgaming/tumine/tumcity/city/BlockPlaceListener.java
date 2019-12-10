@@ -50,7 +50,8 @@ public class BlockPlaceListener implements Listener {
 				if (e.getItemInHand().getItemMeta().getLore().get(0).equals("City building Block")) {
 					if (cityCreator.getRegionFromPlayer(player.getUniqueId().toString(), player.getWorld()) == null) {
 						if (WorldGuard.getInstance().getPlatform().getRegionContainer()
-								.get(BukkitAdapter.adapt(player.getWorld())).getApplicableRegions(block3) == null) {
+								.get(BukkitAdapter.adapt(player.getWorld())).getApplicableRegions(block3).getRegions()
+								.size() < 2) {
 							if (plLoc.containsKey(player)) {
 								Location[] locs = plLoc.get(player);
 								if (locs[0] == null) {
@@ -85,7 +86,7 @@ public class BlockPlaceListener implements Listener {
 						} else {
 							player.sendMessage(WorldGuard.getInstance().getPlatform().getRegionContainer()
 									.get(BukkitAdapter.adapt(player.getWorld())).getApplicableRegions(block3)
-									.toString());
+									.getRegions().toString());
 							e.setCancelled(true);
 						}
 					} else {
