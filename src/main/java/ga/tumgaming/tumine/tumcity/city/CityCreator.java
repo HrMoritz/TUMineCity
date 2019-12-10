@@ -112,7 +112,7 @@ public class CityCreator {
 								
 							}else {
 								newInvites[index] = invites[i];
-								player.sendMessage(newInvites[index]);
+								//player.sendMessage(newInvites[index]);
 								index++;
 							}
 						}
