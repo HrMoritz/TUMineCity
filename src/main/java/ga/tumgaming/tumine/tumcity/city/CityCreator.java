@@ -105,26 +105,24 @@ public class CityCreator {
 					} else if (arr.length >= 2 && arr[0].equals("invites")) {
 						String allInvites = cities.get(s);
 						String[] invites = allInvites.split(",");
-						String[] newInvites = new String[invites.length-1];
+						String[] newInvites = new String[invites.length - 1];
 						int index = 0;
-						for(int i = 0; i < invites.length; i++ ) {
-							if(invites[i].equalsIgnoreCase(name)) {
-								
-							}else {
+						for (int i = 0; i < invites.length; i++) {
+							if (invites[i].equalsIgnoreCase(name)) {
+
+							} else {
 								newInvites[index] = invites[i];
 								index++;
 							}
 						}
 						if (newInvites.length > 0) {
-							String newAllInvites = newInvites[0]; 
+							String newAllInvites = newInvites[0];
 							if (newInvites.length > 1) {
 								for (int i = 0; i < newInvites.length; i++) {
 									newAllInvites = newAllInvites + "," + newInvites[i];
 								}
-								cities.set(s, newAllInvites);
 							}
-						}else {
-							cities.set(s, newInvites[0]);
+							cities.set(s, newAllInvites);
 						}
 					}
 				}
