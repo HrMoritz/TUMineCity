@@ -104,12 +104,10 @@ public class CityCreator {
 						}
 					} else if (arr.length >= 2 && arr[0].equals("invites")) {
 						String allInvites = cities.get(s);
-						player.sendMessage(s);
 						String[] invites = allInvites.split(",");
 						String[] newInvites = new String[invites.length-1];
 						int index = 0;
 						for(int i = 0; i < invites.length; i++ ) {
-							player.sendMessage(invites[i]);
 							if(invites[i].equalsIgnoreCase(name)) {
 								
 							}else {
@@ -117,18 +115,17 @@ public class CityCreator {
 								index++;
 							}
 						}
-						player.sendMessage(invites.toString());
 						if (newInvites.length > 0) {
 							String newAllInvites = newInvites[0];
 							if (newInvites.length > 1) {
 								for (int i = 0; i < newInvites.length; i++) {
 									newAllInvites = newAllInvites + "," + newInvites[i];
 								}
+								cities.set(s, newAllInvites);
 							}
 						}else {
 							cities.delete(s);
 						}
-
 					}
 				}
 				regions.removeRegion(name);
