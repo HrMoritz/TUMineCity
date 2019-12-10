@@ -49,8 +49,8 @@ public class BlockPlaceListener implements Listener {
 					&& e.getItemInHand().getItemMeta().getLore().get(0) != null) {
 				if (e.getItemInHand().getItemMeta().getLore().get(0).equals("City building Block")) {
 					if (cityCreator.getRegionFromPlayer(player.getUniqueId().toString(), player.getWorld()) == null) {
-						if (WorldGuard.getInstance().getPlatform().getRegionContainer().get(BukkitAdapter.adapt(player.getWorld()))
-								.getApplicableRegions(block3) != null) {
+						if (WorldGuard.getInstance().getPlatform().getRegionContainer()
+								.get(BukkitAdapter.adapt(player.getWorld())).getApplicableRegions(block3) == null) {
 							if (plLoc.containsKey(player)) {
 								Location[] locs = plLoc.get(player);
 								if (locs[0] == null) {
@@ -82,8 +82,10 @@ public class BlockPlaceListener implements Listener {
 								player.sendMessage(TUMineCity.getPrefix() + "First block set at: X: " + block.getX()
 										+ " Z: " + block.getZ());
 							}
-						}else {
-							//player.sendMessage(TUMineCity.getPrefix() + ChatColor.RED + "You are already in a city");
+						} else {
+							player.sendMessage(WorldGuard.getInstance().getPlatform().getRegionContainer()
+									.get(BukkitAdapter.adapt(player.getWorld())).getApplicableRegions(block3)
+									.toString());
 							e.setCancelled(true);
 						}
 					} else {
