@@ -13,6 +13,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
 
+import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldedit.math.BlockVector3;
 import com.sk89q.worldedit.world.World;
 import com.sk89q.worldguard.WorldGuard;
@@ -48,7 +49,7 @@ public class BlockPlaceListener implements Listener {
 					&& e.getItemInHand().getItemMeta().getLore().get(0) != null) {
 				if (e.getItemInHand().getItemMeta().getLore().get(0).equals("City building Block")) {
 					if (cityCreator.getRegionFromPlayer(player.getUniqueId().toString(), player.getWorld()) == null) {
-						if (WorldGuard.getInstance().getPlatform().getRegionContainer().get((World) player.getWorld())
+						if (WorldGuard.getInstance().getPlatform().getRegionContainer().get(BukkitAdapter.adapt(player.getWorld()))
 								.getApplicableRegions(block3) != null) {
 							if (plLoc.containsKey(player)) {
 								Location[] locs = plLoc.get(player);
