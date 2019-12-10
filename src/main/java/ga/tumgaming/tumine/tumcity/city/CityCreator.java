@@ -112,11 +112,12 @@ public class CityCreator {
 								
 							}else {
 								newInvites[index] = invites[i];
+								player.sendMessage(newInvites[index]);
 								index++;
 							}
 						}
 						if (newInvites.length > 0) {
-							String newAllInvites = newInvites[0];
+							String newAllInvites = newInvites[0]; 
 							if (newInvites.length > 1) {
 								for (int i = 0; i < newInvites.length; i++) {
 									newAllInvites = newAllInvites + "," + newInvites[i];
