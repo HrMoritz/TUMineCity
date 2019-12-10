@@ -9,8 +9,8 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 
 import ga.tumgaming.tumine.tumcity.TUMineCity;
@@ -29,7 +29,7 @@ public class BlockPlaceListener implements Listener {
 
 	private ArrayList<String> edit = new ArrayList<String>();
 
-	@EventHandler
+	@EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = false)
 	private void onBlockPlace(BlockPlaceEvent e) {
 
 		Block block = e.getBlock();
