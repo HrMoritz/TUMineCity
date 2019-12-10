@@ -51,7 +51,7 @@ public class BlockPlaceListener implements Listener {
 					if (cityCreator.getRegionFromPlayer(player.getUniqueId().toString(), player.getWorld()) == null) {
 						if (WorldGuard.getInstance().getPlatform().getRegionContainer()
 								.get(BukkitAdapter.adapt(player.getWorld())).getApplicableRegions(block3).getRegions()
-								.size() < 2) {
+								.size() == 0) {
 							if (plLoc.containsKey(player)) {
 								Location[] locs = plLoc.get(player);
 								if (locs[0] == null) {
