@@ -102,13 +102,14 @@ public class CityCreator {
 						if (val.equalsIgnoreCase(name)) {
 							cities.delete(s);
 						}
-					} else if (arr.length == 2 && arr[0].equals("invites")) {
+					} else if (arr.length >= 2 && arr[0].equals("invites")) {
 						String allInvites = cities.get(s);
 						player.sendMessage(s);
 						String[] invites = allInvites.split(",");
 						String[] newInvites = new String[invites.length-1];
 						int index = 0;
 						for(int i = 0; i < invites.length; i++ ) {
+							player.sendMessage(invites[i]);
 							if(invites[i].equalsIgnoreCase(name)) {
 								
 							}else {
@@ -130,12 +131,6 @@ public class CityCreator {
 
 					}
 				}
-				/*
-				 * 
-				 * NEED TO REMOVE INVITES OF CITY THAT IS GOING TO BE DESTROYED
-				 * 
-				 * 
-				 */
 				regions.removeRegion(name);
 				return "City has been removed";
 			} else {
