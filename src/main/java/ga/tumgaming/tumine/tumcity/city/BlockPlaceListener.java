@@ -84,9 +84,6 @@ public class BlockPlaceListener implements Listener {
 										+ " Z: " + block.getZ());
 							}
 						} else {
-							player.sendMessage(WorldGuard.getInstance().getPlatform().getRegionContainer()
-									.get(BukkitAdapter.adapt(player.getWorld())).getApplicableRegions(block3)
-									.getRegions().toString());
 							e.setCancelled(true);
 						}
 					} else {
