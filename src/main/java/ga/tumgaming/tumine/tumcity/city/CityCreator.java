@@ -122,6 +122,7 @@ public class CityCreator {
 								for (int i = 0; i < newInvites.length; i++) {
 									newAllInvites = newAllInvites + "," + newInvites[i];
 								}
+								cities.delete(s);
 								cities.set(s, newAllInvites);
 							}
 						}else {
