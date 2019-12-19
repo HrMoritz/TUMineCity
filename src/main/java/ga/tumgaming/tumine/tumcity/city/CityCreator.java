@@ -179,8 +179,7 @@ public class CityCreator {
 				String invite = region.getId();
 				cities.set("invites," + checkPath, invite);
 			}
-			TUMineMessage.getMessageClass().addMessage(UUID.fromString(uuid),
-					TUMineCity.getPrefix() + "You have been invited to join " + region.getId() + "!");
+			TUMineMessage.getMessageClass().addMessage(UUID.fromString(uuid),"You have been invited to join " + region.getId() + "!");
 			Bukkit.getServer().getPlayer(UUID.fromString(uuid))
 					.sendMessage(TUMineCity.getPrefix() + "You have been invited to join " + region.getId() + "!");
 			return name + " has been invited to the city!";
@@ -215,12 +214,9 @@ public class CityCreator {
 			if (members.contains(name)) {
 				members.removePlayer(name);
 				region.setMembers(members);
-				TUMineMessage.getMessageClass().addMessage(name,
-						TUMineCity.getPrefix() + "You were kicked from your city!");
+				TUMineMessage.getMessageClass().addMessage(name,"You were kicked from your city!");
 				Bukkit.getServer().getPlayer(UUID.fromString(uuid))
 						.sendMessage(TUMineCity.getPrefix() + "You were kicked from your city!");
-				Bukkit.getServer().getConsoleSender().sendMessage("Test");
-				Bukkit.getServer().getConsoleSender().sendMessage(TUMineMessage.getMessageClass().toString());
 				List<Player> ops = getOnlinePlayersFromRegion(region.getId());
 				for (Player p : ops) {
 					p.sendMessage(TUMineCity.getPrefix() + name + " was kicked from the City");
@@ -283,15 +279,15 @@ public class CityCreator {
 			String checkPath = player.getUniqueId().toString();
 			if (cities.get(checkPath) == null) {
 				if (isInvited(region.getId(), player.getUniqueId().toString())) {
+					List<Player> ops = getOnlinePlayersFromRegion(region.getId());
+					for (Player p : ops) {
+						p.sendMessage(TUMineCity.getPrefix() + player.getName() + " has joined the City");
+					}
 					DefaultDomain members = region.getMembers();
 					members.addPlayer(player.getName());
 					region.setMembers(members);
 					cities.delete("invites," + checkPath);
 					cities.set(checkPath, region.getId());
-					List<Player> ops = getOnlinePlayersFromRegion(region.getId());
-					for (Player p : ops) {
-						p.sendMessage(TUMineCity.getPrefix() + player.getName() + " has joined the City");
-					}
 					return "Joined the city " + region.getId() + "!";
 				} else {
 					return ChatColor.RED + "You are not invited to join" + region.getId() + "!";
