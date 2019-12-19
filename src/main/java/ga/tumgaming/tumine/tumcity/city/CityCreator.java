@@ -179,9 +179,11 @@ public class CityCreator {
 				String invite = region.getId();
 				cities.set("invites," + checkPath, invite);
 			}
-			TUMineMessage.getMessageClass().addMessage(name,"You have been invited to join " + region.getId() + "!");
-			Bukkit.getServer().getPlayer(UUID.fromString(uuid))
-					.sendMessage(TUMineCity.getPrefix() + "You have been invited to join " + region.getId() + "!");
+			TUMineMessage.getMessageClass().addMessage(name, "You have been invited to join " + region.getId() + "!");
+			if (Bukkit.getServer().getPlayer(UUID.fromString(uuid)) != null) {
+				Bukkit.getServer().getPlayer(UUID.fromString(uuid))
+						.sendMessage(TUMineCity.getPrefix() + "You have been invited to join " + region.getId() + "!");
+			}
 			return name + " has been invited to the city!";
 		} else {
 			return ChatColor.RED + name + " is already in a city";
@@ -214,9 +216,11 @@ public class CityCreator {
 			if (members.contains(name)) {
 				members.removePlayer(name);
 				region.setMembers(members);
-				TUMineMessage.getMessageClass().addMessage(name,"You were kicked from your city!");
-				Bukkit.getServer().getPlayer(UUID.fromString(uuid))
-						.sendMessage(TUMineCity.getPrefix() + "You were kicked from your city!");
+				TUMineMessage.getMessageClass().addMessage(name, "You were kicked from your city!");
+				if (Bukkit.getServer().getPlayer(UUID.fromString(uuid)) != null) {
+					Bukkit.getServer().getPlayer(UUID.fromString(uuid))
+							.sendMessage(TUMineCity.getPrefix() + "You were kicked from your city!");
+				}
 				List<Player> ops = getOnlinePlayersFromRegion(region.getId());
 				for (Player p : ops) {
 					p.sendMessage(TUMineCity.getPrefix() + name + " was kicked from the City");
