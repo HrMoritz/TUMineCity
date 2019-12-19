@@ -5,7 +5,7 @@ import ga.tumgaming.tumine.tumcity.city.BlockPlaceListener;
 import ga.tumgaming.tumine.tumcity.city.CityCreator;
 import ga.tumgaming.tumine.tumcity.city.CommandKit;
 import ga.tumgaming.tumine.tumcity.util.Config;
-import ga.tumgaming.tumine.tuminemessage.TUMineMessage;
+//import ga.tumgaming.tumine.
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
