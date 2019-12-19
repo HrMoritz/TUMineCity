@@ -366,7 +366,7 @@ public class CityCreator {
 		List<Player> names = new ArrayList<Player>();
 		for (String s : key) {
 			if (cities.get(s).equals(region)) {
-				if (UUID.fromString(s) != null) {
+				if (!s.contains(",") && UUID.fromString(s) != null) {
 					if (Bukkit.getServer().getPlayer(UUID.fromString(s)) != null) {
 						names.add(Bukkit.getServer().getPlayer(UUID.fromString(s)));
 					}
