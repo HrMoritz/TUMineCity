@@ -179,7 +179,7 @@ public class CityCreator {
 				String invite = region.getId();
 				cities.set("invites," + checkPath, invite);
 			}
-			TUMineMessage.getMessageClass().addMessage(UUID.fromString(uuid),"You have been invited to join " + region.getId() + "!");
+			TUMineMessage.getMessageClass().addMessage(name,"You have been invited to join " + region.getId() + "!");
 			Bukkit.getServer().getPlayer(UUID.fromString(uuid))
 					.sendMessage(TUMineCity.getPrefix() + "You have been invited to join " + region.getId() + "!");
 			return name + " has been invited to the city!";
