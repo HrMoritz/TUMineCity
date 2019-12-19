@@ -102,6 +102,7 @@ public class CommandKit implements CommandExecutor {
 						return true;
 					} else {
 						player.sendMessage(TUMineCity.getPrefix() + ChatColor.RED + "You are not in a city");
+						return true;
 					}
 				} else if (args[0].equalsIgnoreCase("invites")) {
 
@@ -111,8 +112,10 @@ public class CommandKit implements CommandExecutor {
 					if (cityCreator.getRegionFromPlayer(player.getUniqueId().toString(), player.getWorld()) != null) {
 					player.sendMessage(TUMineCity.getPrefix() + cityCreator
 							.getRegionFromPlayer(player.getUniqueId().toString(), player.getWorld()).getId());
+					return true;
 				}else{
 					player.sendMessage(TUMineCity.getPrefix() + ChatColor.RED + "You are not in a city!");}
+					return true;
 				}
 			}
 		}
