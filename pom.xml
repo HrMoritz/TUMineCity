@@ -41,6 +41,8 @@
 			<groupId>ga.tumgaming.tumine.tuminemessage</groupId>
 			<artifactId>TUMineMessage</artifactId>
 			<version>0.0.0</version>
+			<scope>system</scope>
+			<systemPath>${basedir}/lib/TUMineMessage-0.0.0.jar</systemPath>
 		</dependency>
 
 		<dependency>
