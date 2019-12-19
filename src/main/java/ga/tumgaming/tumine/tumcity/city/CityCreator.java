@@ -3,6 +3,7 @@ package ga.tumgaming.tumine.tumcity.city;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -27,6 +28,7 @@ import com.sk89q.worldguard.protection.regions.RegionContainer;
 
 import ga.tumgaming.tumine.tumcity.TUMineCity;
 import ga.tumgaming.tumine.tumcity.util.Config;
+import ga.tumgaming.tumine.tuminemessage.TUMineMessage;
 
 public class CityCreator {
 	private WorldGuardPlugin wg;
@@ -89,6 +91,10 @@ public class CityCreator {
 
 		if (regions.getRegion(name) != null) {
 			if (regions.getRegion(name).getOwners().contains(player.getName())) {
+				List<Player> ops = getOnlinePlayersFromRegion(name);
+				for (Player p : ops) {
+					p.sendMessage(TUMineCity.getPrefix() + "Your city has been removed");
+				}
 				Set<String> key = cities.getCities();
 				for (String s : key) {
 					String[] arr = s.split(",");
@@ -118,11 +124,10 @@ public class CityCreator {
 										newAllInvites = newAllInvites + "," + newInvites[i];
 									}
 								}
-								player.sendMessage(s + " GIMME GIMME GIMME " + newAllInvites);
 								cities.delete(s);
 								cities.set(s, newAllInvites);
 							}
-						}else {
+						} else {
 							cities.delete(s);
 						}
 					}
@@ -174,10 +179,8 @@ public class CityCreator {
 				String invite = region.getId();
 				cities.set("invites," + checkPath, invite);
 			}
-			if (isOnline) {
-				Bukkit.getPlayer(UUID.fromString(uuid))
-						.sendMessage(TUMineCity.getPrefix() + "You have been invited to join " + region.getId() + "!");
-			}
+			TUMineMessage.getMessageClass().addMessage(UUID.fromString(uuid),
+					"You have been invited to join " + region.getId() + "!");
 			return name + " has been invited to the city!";
 		} else {
 			return ChatColor.RED + name + " is already in a city";
@@ -210,6 +213,12 @@ public class CityCreator {
 			if (members.contains(name)) {
 				members.removePlayer(name);
 				region.setMembers(members);
+				TUMineMessage.getMessageClass().addMessage(name, "You were kicked from your city!");
+				List<Player> ops = getOnlinePlayersFromRegion(region.getId());
+				for (Player p : ops) {
+					p.sendMessage(TUMineCity.getPrefix() + name + " was kicked from the City");
+				}
+
 				return "Removed member!";
 			} else {
 				return ChatColor.RED + name + " is not a member of this city";
@@ -238,12 +247,20 @@ public class CityCreator {
 				region.setOwners(owners);
 				members.removePlayer(newOwner);
 				region.setMembers(members);
+				List<Player> ops = getOnlinePlayersFromRegion(region.getId());
+				for (Player p : ops) {
+					p.sendMessage(TUMineCity.getPrefix() + player.getName() + " has left the City");
+				}
 				return "You left the city " + region.getId() + "!";
 			} else {
 				cities.delete(checkPath);
 				DefaultDomain members = region.getMembers();
 				members.removePlayer(player.getName());
 				region.setMembers(members);
+				List<Player> ops = getOnlinePlayersFromRegion(region.getId());
+				for (Player p : ops) {
+					p.sendMessage(TUMineCity.getPrefix() + player.getName() + " has left the City");
+				}
 				return "You left the city " + region.getId() + "!";
 			}
 
@@ -262,6 +279,10 @@ public class CityCreator {
 					region.setMembers(members);
 					cities.delete("invites," + checkPath);
 					cities.set(checkPath, region.getId());
+					List<Player> ops = getOnlinePlayersFromRegion(region.getId());
+					for (Player p : ops) {
+						p.sendMessage(TUMineCity.getPrefix() + player.getName() + " has joined the City");
+					}
 					return "Joined the city " + region.getId() + "!";
 				} else {
 					return ChatColor.RED + "You are not invited to join" + region.getId() + "!";
@@ -329,5 +350,20 @@ public class CityCreator {
 		} catch (Exception ex) {
 			return false;
 		}
+	}
+
+	public List<Player> getOnlinePlayersFromRegion(String region) {
+		Set<String> key = cities.getCities();
+		List<Player> names = new ArrayList<Player>();
+		for (String s : key) {
+			if (cities.get(s).equals(region)) {
+				if (UUID.fromString(s) != null) {
+					if (Bukkit.getServer().getPlayer(UUID.fromString(s)) != null) {
+						names.add(Bukkit.getServer().getPlayer(UUID.fromString(s)));
+					}
+				}
+			}
+		}
+		return names;
 	}
 }

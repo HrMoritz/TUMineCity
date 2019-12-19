@@ -23,11 +23,11 @@
 			<id>jitpack.io</id>
 			<url>https://jitpack.io</url>
 		</repository>
-		
+
 		<repository>
-        <id>sk89q-repo</id>
-        <url>https://maven.enginehub.org/repo/</url>
-    </repository>
+			<id>sk89q-repo</id>
+			<url>https://maven.enginehub.org/repo/</url>
+		</repository>
 	</repositories>
 
 	<dependencies>
@@ -36,7 +36,13 @@
 			<artifactId>spigot-api</artifactId>
 			<version>1.14-R0.1-SNAPSHOT</version>
 		</dependency>
-		
+
+		<dependency>
+			<groupId>ga.tumgaming.tumine.tuminemessage</groupId>
+			<artifactId>TUMineMessage</artifactId>
+			<version>0.0.0</version>
+		</dependency>
+
 		<dependency>
 			<artifactId>org.spigotmc</artifactId>
 			<version>1.14.4-R0.1-SNAPSHOT</version>
