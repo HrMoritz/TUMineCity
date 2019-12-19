@@ -214,6 +214,8 @@ public class CityCreator {
 				members.removePlayer(name);
 				region.setMembers(members);
 				TUMineMessage.getMessageClass().addMessage(name, "You were kicked from your city!");
+				Bukkit.getServer().getConsoleSender().sendMessage("Test");
+				Bukkit.getServer().getConsoleSender().sendMessage(TUMineMessage.getMessageClass().toString());
 				List<Player> ops = getOnlinePlayersFromRegion(region.getId());
 				for (Player p : ops) {
 					p.sendMessage(TUMineCity.getPrefix() + name + " was kicked from the City");
