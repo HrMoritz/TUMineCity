@@ -30,8 +30,6 @@ import ga.tumgaming.tumine.tumcity.TUMineCity;
 import ga.tumgaming.tumine.tumcity.util.Config;
 import ga.tumgaming.tumine.tuminemessage.TUMineMessage;
 
-
-
 public class CityCreator {
 	private WorldGuardPlugin wg;
 	private Config cities;
@@ -182,7 +180,9 @@ public class CityCreator {
 				cities.set("invites," + checkPath, invite);
 			}
 			TUMineMessage.getMessageClass().addMessage(UUID.fromString(uuid),
-					"You have been invited to join " + region.getId() + "!");
+					TUMineCity.getPrefix() + "You have been invited to join " + region.getId() + "!");
+			Bukkit.getServer().getPlayer(UUID.fromString(uuid))
+					.sendMessage(TUMineCity.getPrefix() + "You have been invited to join " + region.getId() + "!");
 			return name + " has been invited to the city!";
 		} else {
 			return ChatColor.RED + name + " is already in a city";
@@ -215,7 +215,10 @@ public class CityCreator {
 			if (members.contains(name)) {
 				members.removePlayer(name);
 				region.setMembers(members);
-				TUMineMessage.getMessageClass().addMessage(name, "You were kicked from your city!");
+				TUMineMessage.getMessageClass().addMessage(name,
+						TUMineCity.getPrefix() + "You were kicked from your city!");
+				Bukkit.getServer().getPlayer(UUID.fromString(uuid))
+						.sendMessage(TUMineCity.getPrefix() + "You were kicked from your city!");
 				Bukkit.getServer().getConsoleSender().sendMessage("Test");
 				Bukkit.getServer().getConsoleSender().sendMessage(TUMineMessage.getMessageClass().toString());
 				List<Player> ops = getOnlinePlayersFromRegion(region.getId());
@@ -263,7 +266,9 @@ public class CityCreator {
 				region.setMembers(members);
 				List<Player> ops = getOnlinePlayersFromRegion(region.getId());
 				for (Player p : ops) {
-					p.sendMessage(TUMineCity.getPrefix() + player.getName() + " has left the City");
+					if (p != player) {
+						p.sendMessage(TUMineCity.getPrefix() + player.getName() + " has left the City");
+					}
 				}
 				return "You left the city " + region.getId() + "!";
 			}
