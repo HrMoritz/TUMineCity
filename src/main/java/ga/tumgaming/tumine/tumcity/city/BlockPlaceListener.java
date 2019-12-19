@@ -9,27 +9,21 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
 
 import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldedit.math.BlockVector3;
-import com.sk89q.worldedit.world.World;
 import com.sk89q.worldguard.WorldGuard;
-import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 
 import ga.tumgaming.tumine.tumcity.TUMineCity;
 
 public class BlockPlaceListener implements Listener {
 
 	private HashMap<Player, Location[]> plLoc;
-	private TUMineCity plugin;
 	private CityCreator cityCreator;
-	private WorldGuardPlugin wg;
 
-	public BlockPlaceListener(TUMineCity pl, HashMap<Player, Location[]> hm, CityCreator cc) {
-		plugin = pl;
+	public BlockPlaceListener(HashMap<Player, Location[]> hm, CityCreator cc) {
 		plLoc = hm;
 		cityCreator = cc;
 	}
@@ -38,7 +32,6 @@ public class BlockPlaceListener implements Listener {
 
 	@EventHandler
 	private void onBlockPlace(BlockPlaceEvent e) {
-
 		Block block = e.getBlock();
 		Player player = e.getPlayer();
 		BlockVector3 block3 = BlockVector3.at(block.getLocation().getX(), block.getLocation().getY(),

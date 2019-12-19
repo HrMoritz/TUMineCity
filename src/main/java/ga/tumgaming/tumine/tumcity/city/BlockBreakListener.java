@@ -2,8 +2,6 @@ package ga.tumgaming.tumine.tumcity.city;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -22,13 +20,8 @@ import ga.tumgaming.tumine.tumcity.TUMineCity;
 public class BlockBreakListener implements Listener {
 
 	private HashMap<Player, Location[]> plLoc;
-	private TUMineCity plugin;
-	private CityCreator cityCreator;
-
-	public BlockBreakListener(TUMineCity pl, HashMap<Player, Location[]> hm, CityCreator cc) {
-		plugin = pl;
+	public BlockBreakListener(HashMap<Player, Location[]> hm) {
 		plLoc = hm;
-		cityCreator = cc;
 	}
 
 	@EventHandler

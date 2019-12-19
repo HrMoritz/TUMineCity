@@ -1,10 +1,8 @@
 package ga.tumgaming.tumine.tumcity.city;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -16,7 +14,6 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 
 import com.sk89q.worldedit.bukkit.BukkitAdapter;
-import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import com.sk89q.worldedit.math.BlockVector3;
 import com.sk89q.worldguard.LocalPlayer;
 import com.sk89q.worldguard.WorldGuard;
@@ -32,8 +29,6 @@ import ga.tumgaming.tumine.tumcity.TUMineCity;
 import ga.tumgaming.tumine.tumcity.util.Config;
 
 public class CityCreator {
-
-	private WorldEditPlugin we;
 	private WorldGuardPlugin wg;
 	private Config cities;
 	private HashMap<Player, Location[]> plLoc;

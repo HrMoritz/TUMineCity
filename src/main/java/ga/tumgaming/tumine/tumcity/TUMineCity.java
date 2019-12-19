@@ -26,12 +26,8 @@ public class TUMineCity extends JavaPlugin {
 	private static Config invitations;
 
 	private static Plugin plugin;
-	
-	private static TUMineCity instance;
 
 	private static CityCreator cityCreator;
-
-	private static CommandKit commandKit;
 
 	private static WorldGuardPlugin worldGuardPlugin;
 	
@@ -39,7 +35,6 @@ public class TUMineCity extends JavaPlugin {
 
 	@Override
 	public void onEnable() {
-		instance = this;
 		this.plugin = this;
 		worldGuardPlugin = getWorldGuard();
 		player = new Config(this, "player");
@@ -61,8 +56,8 @@ public class TUMineCity extends JavaPlugin {
 
 	private static void registerEvents() {
 		PluginManager pluginManager = Bukkit.getPluginManager();
-		pluginManager.registerEvents(new BlockPlaceListener(instance, plLoc, cityCreator), plugin);
-		pluginManager.registerEvents(new BlockBreakListener(instance, plLoc, cityCreator), plugin);
+		pluginManager.registerEvents(new BlockPlaceListener(plLoc, cityCreator), plugin);
+		pluginManager.registerEvents(new BlockBreakListener(plLoc), plugin);
 
 	}
 
